@@ -14,6 +14,22 @@ OnLine = Callable[[str], None]
 OnDone = Callable[[int | None], None]
 
 
+def _win_hide_console_flags(extra: int = 0) -> int:
+    if sys.platform != "win32":
+        return 0
+    # Avoid flashing black console windows when a GUI app spawns CLI tools.
+    return int(getattr(subprocess, "CREATE_NO_WINDOW", 0x08000000)) | extra
+
+
+def _win_startupinfo():
+    if sys.platform != "win32":
+        return None
+    info = subprocess.STARTUPINFO()
+    info.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    info.wShowWindow = subprocess.SW_HIDE
+    return info
+
+
 class DownloadRunner:
     """Manage a single yt-dlp process."""
 
@@ -41,14 +57,13 @@ class DownloadRunner:
 
         creationflags = 0
         if sys.platform == "win32":
-            # New process group so we can kill the tree
-            creationflags = subprocess.CREATE_NEW_PROCESS_GROUP  # type: ignore[attr-defined]
+            creationflags = _win_hide_console_flags(
+                int(getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0))
+            )
 
         env = os.environ.copy()
-        # Force UTF-8 console output from yt-dlp when possible
         env.setdefault("PYTHONIOENCODING", "utf-8")
         env.setdefault("PYTHONUTF8", "1")
-        # Prepend managed bin so yt-dlp finds ffmpeg/ffprobe for merges
         if path_prepend:
             parts = path_prepend if isinstance(path_prepend, list) else [path_prepend]
             prefix = os.pathsep.join(p for p in parts if p)
@@ -67,6 +82,7 @@ class DownloadRunner:
             cwd=cwd or None,
             env=env,
             creationflags=creationflags,
+            startupinfo=_win_startupinfo(),
         )
         with self._lock:
             self._proc = proc
@@ -101,12 +117,13 @@ class DownloadRunner:
         pid = proc.pid
         try:
             if sys.platform == "win32":
-                # Kill entire process tree
                 subprocess.run(
                     ["taskkill", "/F", "/T", "/PID", str(pid)],
                     capture_output=True,
                     text=True,
                     check=False,
+                    creationflags=_win_hide_console_flags(),
+                    startupinfo=_win_startupinfo(),
                 )
             else:
                 try:

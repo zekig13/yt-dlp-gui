@@ -124,6 +124,18 @@ def _download_file(
     tmp.replace(dest)
 
 
+def _win_hide_kwargs() -> dict:
+    if sys.platform != "win32":
+        return {}
+    info = subprocess.STARTUPINFO()
+    info.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    info.wShowWindow = subprocess.SW_HIDE
+    return {
+        "startupinfo": info,
+        "creationflags": int(getattr(subprocess, "CREATE_NO_WINDOW", 0x08000000)),
+    }
+
+
 def _run_version(argv: list[str]) -> str:
     try:
         proc = subprocess.run(
@@ -134,6 +146,7 @@ def _run_version(argv: list[str]) -> str:
             errors="replace",
             timeout=30,
             check=False,
+            **_win_hide_kwargs(),
         )
     except (OSError, subprocess.TimeoutExpired) as exc:
         raise RuntimeError(f"Sürüm kontrolü başarısız: {argv[0]} — {exc}") from exc
