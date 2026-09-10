@@ -2,7 +2,17 @@
 
 Windows için **yt-dlp** grafik arayüzü. Tüketiciler için kurulum yok: uygulama ilk çalıştırmada `yt-dlp.exe` ve `ffmpeg` araçlarını kendisi indirir. Yapmanız gereken tek şey URL yapıştırıp **İndir**e basmak.
 
-## Hızlı başlangıç
+## Windows .exe (önerilen)
+
+Python kurmanıza gerek yok:
+
+1. [Releases](https://github.com/zekig13/yt-dlp-gui/releases) sayfasından `yt-dlp-gui-windows-x64.zip` indirin
+2. Zip'i açın
+3. `yt-dlp-gui.exe` dosyasına çift tıklayın
+
+İlk açılışta uygulama yt-dlp ve ffmpeg'i `%LOCALAPPDATA%\yt-dlp-gui\bin\` altına indirir. Çökme olursa log: `%LOCALAPPDATA%\yt-dlp-gui\crash.log`.
+
+## Kaynaktan çalıştırma
 
 ```powershell
 cd C:\Users\B\yt-dlp-gui
@@ -12,7 +22,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-İlk açılışta durum çubuğunda **«Araçlar hazırlanıyor…»** görürsünüz. yt-dlp ve ffmpeg `%LOCALAPPDATA%\yt-dlp-gui\bin\` altına iner (yönetici yetkisi gerekmez). Ardından:
+İlk açılışta durum çubuğunda **«Araçlar hazırlanıyor…»** görürsünüz. Ardından:
 
 1. URL yapıştırın  
 2. **İndir**e basın  
@@ -21,8 +31,8 @@ Ses+video birleştirmesi (merge) için ffmpeg yolu otomatik `PATH`e eklenir.
 
 ## Gereksinimler
 
-- Python 3.10+ (önerilen 3.13+)
-- İnternet (yalnızca ilk çalıştırma / araç yenileme)
+- **Release .exe:** yalnızca Windows x64 + internet (ilk çalıştırma)
+- **Kaynak:** Python 3.10+ (önerilen 3.13+)
 - **Manuel ffmpeg veya yt-dlp kurulumu gerekmez**
 
 İsteğe bağlı: çerez dosyası (`--cookies`) gelişmiş alanda seçilebilir.
@@ -38,10 +48,24 @@ Ses+video birleştirmesi (merge) için ffmpeg yolu otomatik `PATH`e eklenir.
 
 ## Araçları yenileme
 
-Arayüzdeki **Araçları Yenile** düğmesi yt-dlp / ffmpeg’i yeniden indirir. Kaynaklar:
+Arayüzdeki **Araçları Yenile** düğmesi yt-dlp / ffmpeg'i yeniden indirir. Kaynaklar:
 
 - yt-dlp: resmi GitHub `releases/latest` (`yt-dlp.exe`)
 - ffmpeg: gyan.dev essentials zip (yedek: BtbN win64)
+
+## Windows .exe derleme (geliştiriciler)
+
+```powershell
+pip install -r requirements.txt pyinstaller
+powershell -ExecutionPolicy Bypass -File .\build.ps1
+```
+
+Çıktı:
+
+- `dist\yt-dlp-gui\yt-dlp-gui.exe` (onedir, çift tıklanabilir)
+- `release\yt-dlp-gui-windows-x64.zip` (Release yüklemesi için)
+
+`dist/`, `build/`, `release/` ve `*.exe` git'e commit edilmez. yt-dlp/ffmpeg exe içine gömülmez; uygulama ilk çalıştırmada LocalAppData'ya indirir.
 
 ## Katalog yenileme (geliştiriciler)
 
@@ -56,6 +80,7 @@ python scripts\generate_catalog.py --help-file yt-dlp-help.txt --output app\opti
 
 ```
 main.py
+build.ps1
 app/
   catalog.py
   command_builder.py

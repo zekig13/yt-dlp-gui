@@ -10,6 +10,7 @@ venv/
 dist/
 build/
 
+
 # Local / secrets / binaries (do not commit)
 yt-dlp.exe
 *.exe
@@ -44,3 +45,6 @@ bin/
 ffmpeg*/
 *.zip
 *.partial
+
+# Local release staging (zip already covered by *.zip)
+release/
