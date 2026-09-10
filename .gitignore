@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.env
+.Python
+dist/
+build/
+
+# Local / secrets / binaries (do not commit)
+yt-dlp.exe
+*.exe
+cookies.txt
+*.cookies
+*.mp4
+*.mkv
+*.webm
+*.mp3
+*.m4a
+*.part
+*.ytdl
+*.temp
+downloads/
+media/
+
+# Help dump can be regenerated; optional to keep locally
+# yt-dlp-help.txt
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Runtime settings live in %APPDATA%
+settings.json
