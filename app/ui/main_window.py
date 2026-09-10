@@ -1,6 +1,7 @@
 """Main CustomTkinter window for yt-dlp GUI."""
 from __future__ import annotations
 
+import threading
 import tkinter as tk
 from pathlib import Path
 from tkinter import filedialog, messagebox
@@ -10,6 +11,7 @@ import customtkinter as ctk
 
 from app.catalog import load_catalog
 from app.command_builder import build_command, command_preview
+from app.deps import ensure_dependencies, managed_bin_dir, tool_paths
 from app.runner import DownloadRunner
 from app.settings import load_settings, save_settings
 from app.ui.option_widgets import SectionFrame
@@ -38,6 +40,10 @@ class MainWindow(ctk.CTk):
         self.runner = DownloadRunner()
         self._section_frames: list[SectionFrame] = []
         self._preview_after: str | None = None
+        self._deps_ready = False
+        self._deps_error: str | None = None
+        self._deps_busy = False
+        self._bin_dir = managed_bin_dir()
 
         geo = self.settings.get("window_geometry") or "1100x780"
         try:
@@ -54,6 +60,7 @@ class MainWindow(ctk.CTk):
         self._load_into_ui()
         self.protocol("WM_DELETE_WINDOW", self._on_close)
         self.after(200, self._update_preview)
+        self.after(300, self._start_deps_ensure)
 
     # ------------------------------------------------------------------ UI
     def _build_ui(self) -> None:
@@ -112,6 +119,7 @@ class MainWindow(ctk.CTk):
         )
         self.format_combo.grid(row=r, column=1, sticky="w", padx=6, pady=4)
 
+        # Advanced path overrides (collapsed by default intent: optional)
         r = 4
         ctk.CTkLabel(top, text="Çerezler\n(--cookies)").grid(
             row=r, column=0, sticky="w", padx=6, pady=4
@@ -126,17 +134,35 @@ class MainWindow(ctk.CTk):
         self.cookies_var.trace_add("write", lambda *_: self._schedule_preview())
 
         r = 5
-        ctk.CTkLabel(top, text="yt-dlp yolu").grid(
+        ctk.CTkLabel(top, text="yt-dlp yolu\n(gelişmiş)").grid(
             row=r, column=0, sticky="w", padx=6, pady=4
         )
         self.ytdlp_var = ctk.StringVar()
         ctk.CTkEntry(top, textvariable=self.ytdlp_var).grid(
             row=r, column=1, sticky="ew", padx=6, pady=4
         )
-        ctk.CTkButton(top, text="Gözat…", width=90, command=self._browse_ytdlp).grid(
-            row=r, column=2, padx=6, pady=4
+        ytdlp_btns = ctk.CTkFrame(top, fg_color="transparent")
+        ytdlp_btns.grid(row=r, column=2, padx=6, pady=4)
+        ctk.CTkButton(ytdlp_btns, text="Gözat…", width=70, command=self._browse_ytdlp).pack(
+            side="left", padx=(0, 4)
         )
+        ctk.CTkButton(
+            ytdlp_btns, text="Varsayılan", width=80, command=self._use_managed_ytdlp
+        ).pack(side="left")
         self.ytdlp_var.trace_add("write", lambda *_: self._schedule_preview())
+
+        r = 6
+        self.deps_status_var = ctk.StringVar(value="Araçlar hazırlanıyor…")
+        ctk.CTkLabel(top, textvariable=self.deps_status_var, anchor="w").grid(
+            row=r, column=0, columnspan=2, sticky="ew", padx=6, pady=(2, 6)
+        )
+        self.btn_retry_deps = ctk.CTkButton(
+            top,
+            text="Araçları Yenile",
+            width=120,
+            command=lambda: self._start_deps_ensure(force=True),
+        )
+        self.btn_retry_deps.grid(row=r, column=2, padx=6, pady=(2, 6))
 
         # --- Notebook: options + log ---
         self.tabs = ctk.CTkTabview(self)
@@ -187,7 +213,7 @@ class MainWindow(ctk.CTk):
         bottom.grid_columnconfigure(4, weight=1)
 
         self.btn_run = ctk.CTkButton(
-            bottom, text="İndirmeyi Başlat", width=140, command=self._start_download
+            bottom, text="İndir", width=140, command=self._start_download
         )
         self.btn_run.grid(row=0, column=0, padx=4)
         self.btn_cancel = ctk.CTkButton(
@@ -261,14 +287,28 @@ class MainWindow(ctk.CTk):
         if path:
             self.ytdlp_var.set(path)
 
+    def _use_managed_ytdlp(self) -> None:
+        self.ytdlp_var.set(str(tool_paths().ytdlp))
+
     def _load_into_ui(self) -> None:
         s = self.settings
         self.urls_text.delete("1.0", "end")
         self.urls_text.insert("1.0", s.get("urls") or "")
-        self.output_dir_var.set(s.get("output_dir") or "")
+        out = (s.get("output_dir") or "").strip()
+        if not out:
+            out = str(Path.home() / "Downloads")
+        self.output_dir_var.set(out)
         self.output_tmpl_var.set(s.get("output_template") or "")
         self.cookies_var.set(s.get("cookies_path") or "")
-        self.ytdlp_var.set(s.get("ytdlp_path") or "")
+        ytdlp = (s.get("ytdlp_path") or "").strip()
+        # Migrate old hard-coded default to managed bin
+        if not ytdlp or ytdlp.lower() in {
+            r"c:\yt-dlp\yt-dlp.exe",
+            "yt-dlp",
+            "yt-dlp.exe",
+        }:
+            ytdlp = str(tool_paths().ytdlp)
+        self.ytdlp_var.set(ytdlp)
         key = s.get("format_shortcut") or "best"
         self.format_combo.set(self._fmt_rev.get(key, self._fmt_rev["best"]))
         opt_vals = s.get("option_values") or {}
@@ -333,7 +373,11 @@ class MainWindow(ctk.CTk):
         total = 0
         for sf in self._section_frames:
             total += sf.apply_filter(q)
-        self.search_count.configure(text=f"{total} eşleşme" if q else f"{self.catalog.get('option_count', 0)} seçenek")
+        self.search_count.configure(
+            text=f"{total} eşleşme"
+            if q
+            else f"{self.catalog.get('option_count', 0)} seçenek"
+        )
 
     def _append_log(self, line: str) -> None:
         self.log_box.configure(state="normal")
@@ -365,7 +409,7 @@ class MainWindow(ctk.CTk):
         data = self._gather_settings()
         save_settings(data)
         self.settings = data
-        self.status_var.set(f"Kaydedildi: ayarlar")
+        self.status_var.set("Kaydedildi: ayarlar")
 
     def _on_close(self) -> None:
         try:
@@ -381,11 +425,91 @@ class MainWindow(ctk.CTk):
             self.runner.cancel()
         self.destroy()
 
+    # ----------------------------------------------------------- deps
+    def _start_deps_ensure(self, force: bool = False) -> None:
+        if self._deps_busy:
+            return
+        self._deps_busy = True
+        self._deps_ready = False
+        self._deps_error = None
+        self.btn_run.configure(state="disabled")
+        self.btn_retry_deps.configure(state="disabled")
+        self.deps_status_var.set("Araçlar hazırlanıyor…")
+        self.status_var.set("Araçlar hazırlanıyor…")
+
+        def progress(message: str, fraction: float | None) -> None:
+            def ui() -> None:
+                if fraction is None:
+                    self.deps_status_var.set(message)
+                else:
+                    pct = int(fraction * 100)
+                    self.deps_status_var.set(f"{message} ({pct}%)")
+                self.status_var.set("Araçlar hazırlanıyor…")
+
+            self.after(0, ui)
+
+        def worker() -> None:
+            try:
+                paths = ensure_dependencies(
+                    progress=progress,
+                    force_ytdlp=force,
+                    force_ffmpeg=force,
+                )
+                self.after(0, lambda: self._deps_finished(ok=True, paths=paths, error=None))
+            except Exception as exc:  # noqa: BLE001
+                self.after(
+                    0, lambda: self._deps_finished(ok=False, paths=None, error=str(exc))
+                )
+
+        threading.Thread(target=worker, name="deps-ensure", daemon=True).start()
+
+    def _deps_finished(self, *, ok: bool, paths, error: str | None) -> None:
+        self._deps_busy = False
+        self.btn_retry_deps.configure(state="normal")
+        if ok and paths is not None:
+            self._deps_ready = True
+            self._deps_error = None
+            self._bin_dir = paths.bin_dir
+            # Keep advanced override if user already chose a custom path that exists
+            current = self.ytdlp_var.get().strip()
+            managed = str(paths.ytdlp)
+            if (not current) or (not Path(current).is_file()) or current.lower().endswith(
+                r"\yt-dlp\yt-dlp.exe"
+            ):
+                self.ytdlp_var.set(managed)
+            self.deps_status_var.set(f"Araçlar hazır — {paths.bin_dir}")
+            self.status_var.set("Hazır — URL yapıştırıp İndir’e basın")
+            self.btn_run.configure(state="normal")
+            self._schedule_preview()
+        else:
+            self._deps_ready = False
+            self._deps_error = error or "Bilinmeyen hata"
+            self.deps_status_var.set("Araç kurulumu başarısız")
+            self.status_var.set("Araç hatası")
+            self.btn_run.configure(state="disabled")
+            messagebox.showerror(
+                "Araçlar kurulamadı",
+                "yt-dlp ve ffmpeg otomatik indirilemedi.\n\n"
+                f"{self._deps_error}\n\n"
+                "İnternet bağlantınızı kontrol edip «Araçları Yenile»ye basın.",
+            )
+
     # ----------------------------------------------------------- run/cancel
     def _start_download(self) -> None:
         if self.runner.is_running:
             messagebox.showwarning("Uyarı", "Zaten bir indirme çalışıyor.")
             return
+        if self._deps_busy:
+            messagebox.showinfo("Bekleyin", "Araçlar hâlâ hazırlanıyor…")
+            return
+        if not self._deps_ready:
+            if messagebox.askyesno(
+                "Araçlar eksik",
+                "yt-dlp / ffmpeg henüz hazır değil.\nYeniden denemek ister misiniz?",
+            ):
+                self._start_deps_ensure(force=True)
+            return
+
         ytdlp = self.ytdlp_var.get().strip()
         if not ytdlp:
             messagebox.showerror("Hata", "yt-dlp yolu boş.")
@@ -393,9 +517,11 @@ class MainWindow(ctk.CTk):
         if not Path(ytdlp).is_file():
             if not messagebox.askyesno(
                 "yt-dlp bulunamadı",
-                f"Dosya yok:\n{ytdlp}\n\nYine de çalıştırmayı dene?",
+                f"Dosya yok:\n{ytdlp}\n\nYönetilen araçları yeniden indirmek ister misiniz?",
             ):
                 return
+            self._start_deps_ensure(force=True)
+            return
         urls = self._urls_list()
         if not urls:
             messagebox.showerror("Hata", "En az bir URL girin.")
@@ -408,6 +534,7 @@ class MainWindow(ctk.CTk):
         self.log_box.delete("1.0", "end")
         self.log_box.configure(state="disabled")
         self._append_log("$ " + command_preview(argv))
+        self._append_log(f"[PATH += {self._bin_dir}]")
         self._append_log("—")
 
         self.btn_run.configure(state="disabled")
@@ -428,7 +555,13 @@ class MainWindow(ctk.CTk):
             self.after(0, lambda: self._download_finished(code))
 
         try:
-            self.runner.start(argv, on_line=on_line, on_done=on_done, cwd=cwd)
+            self.runner.start(
+                argv,
+                on_line=on_line,
+                on_done=on_done,
+                cwd=cwd,
+                path_prepend=str(self._bin_dir),
+            )
         except Exception as exc:
             self.btn_run.configure(state="normal")
             self.btn_cancel.configure(state="disabled")

@@ -34,6 +34,7 @@ class DownloadRunner:
         on_line: OnLine | None = None,
         on_done: OnDone | None = None,
         cwd: str | None = None,
+        path_prepend: str | list[str] | None = None,
     ) -> None:
         if self.is_running:
             raise RuntimeError("Bir indirme zaten çalışıyor")
@@ -47,6 +48,12 @@ class DownloadRunner:
         # Force UTF-8 console output from yt-dlp when possible
         env.setdefault("PYTHONIOENCODING", "utf-8")
         env.setdefault("PYTHONUTF8", "1")
+        # Prepend managed bin so yt-dlp finds ffmpeg/ffprobe for merges
+        if path_prepend:
+            parts = path_prepend if isinstance(path_prepend, list) else [path_prepend]
+            prefix = os.pathsep.join(p for p in parts if p)
+            if prefix:
+                env["PATH"] = prefix + os.pathsep + env.get("PATH", "")
 
         proc = subprocess.Popen(
             argv,

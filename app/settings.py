@@ -10,9 +10,18 @@ from typing import Any
 
 APP_NAME = "yt-dlp-gui"
 
+def _default_ytdlp_path() -> str:
+    try:
+        from app.deps import default_ytdlp_path
+
+        return default_ytdlp_path()
+    except Exception:
+        return str(Path.home() / "AppData" / "Local" / APP_NAME / "bin" / "yt-dlp.exe")
+
+
 DEFAULTS: dict[str, Any] = {
-    "ytdlp_path": r"C:\yt-dlp\yt-dlp.exe",
-    "cookies_path": r"C:\yt-dlp\cookies.txt",
+    "ytdlp_path": _default_ytdlp_path(),
+    "cookies_path": "",
     "output_dir": str(Path.home() / "Downloads"),
     "output_template": "%(title)s [%(id)s].%(ext)s",
     "format_shortcut": "best",

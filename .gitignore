@@ -38,3 +38,9 @@ Thumbs.db
 
 # Runtime settings live in %APPDATA%
 settings.json
+
+# Managed tool downloads (also live under %LOCALAPPDATA%\yt-dlp-gui\bin)
+bin/
+ffmpeg*/
+*.zip
+*.partial
