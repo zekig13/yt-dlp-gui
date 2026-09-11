@@ -148,21 +148,53 @@ class MainWindow(ctk.CTk):
         )
         self.format_combo.grid(row=r, column=1, sticky="w", padx=6, pady=4)
 
-        # Advanced path overrides (collapsed by default intent: optional)
+        # Cookies source + optional cookies.txt path
         r = 4
+        ctk.CTkLabel(top, text="Çerez kaynağı").grid(
+            row=r, column=0, sticky="w", padx=6, pady=4
+        )
+        self._cookies_source_labels = [
+            ("file", "Dosya (cookies.txt)"),
+            ("chrome", "Chrome"),
+            ("edge", "Edge"),
+            ("firefox", "Firefox"),
+            ("none", "Yok"),
+        ]
+        self._cookies_src_map = {lab: key for key, lab in self._cookies_source_labels}
+        self._cookies_src_rev = {key: lab for key, lab in self._cookies_source_labels}
+        self.cookies_source_combo = ctk.CTkComboBox(
+            top,
+            values=[lab for _, lab in self._cookies_source_labels],
+            command=self._on_cookies_source_change,
+            width=240,
+        )
+        self.cookies_source_combo.grid(row=r, column=1, sticky="w", padx=6, pady=4)
+        self.cookies_source_combo.set(self._cookies_src_rev["none"])
+
+        r = 5
         ctk.CTkLabel(top, text="Çerezler\n(--cookies)").grid(
             row=r, column=0, sticky="w", padx=6, pady=4
         )
         self.cookies_var = ctk.StringVar()
-        ctk.CTkEntry(top, textvariable=self.cookies_var).grid(
-            row=r, column=1, sticky="ew", padx=6, pady=4
+        self.cookies_entry = ctk.CTkEntry(top, textvariable=self.cookies_var)
+        self.cookies_entry.grid(row=r, column=1, sticky="ew", padx=6, pady=4)
+        self.cookies_browse_btn = ctk.CTkButton(
+            top, text="Gözat…", width=90, command=self._browse_cookies
         )
-        ctk.CTkButton(top, text="Gözat…", width=90, command=self._browse_cookies).grid(
-            row=r, column=2, padx=6, pady=4
-        )
+        self.cookies_browse_btn.grid(row=r, column=2, padx=6, pady=4)
         self.cookies_var.trace_add("write", lambda *_: self._schedule_preview())
 
-        r = 5
+        r = 6
+        self.cookies_hint = ctk.CTkLabel(
+            top,
+            text="Tarayıcı kapalıyken daha güvenilir; siteye giriş yapmış olmalısın.",
+            text_color=("gray40", "gray65"),
+            anchor="w",
+            font=ctk.CTkFont(size=12),
+        )
+        self.cookies_hint.grid(row=r, column=1, columnspan=2, sticky="ew", padx=6, pady=(0, 4))
+
+        r = 7
         ctk.CTkLabel(top, text="yt-dlp yolu\n(gelişmiş)").grid(
             row=r, column=0, sticky="w", padx=6, pady=4
         )
@@ -180,7 +212,7 @@ class MainWindow(ctk.CTk):
         ).pack(side="left")
         self.ytdlp_var.trace_add("write", lambda *_: self._schedule_preview())
 
-        r = 6
+        r = 8
         self.deps_status_var = ctk.StringVar(value="Araçlar hazırlanıyor…")
         ctk.CTkLabel(top, textvariable=self.deps_status_var, anchor="w").grid(
             row=r, column=0, columnspan=2, sticky="ew", padx=6, pady=(2, 6)
@@ -408,6 +440,26 @@ class MainWindow(ctk.CTk):
         )
         if path:
             self.cookies_var.set(path)
+            # Selecting a file implies file mode
+            self.cookies_source_combo.set(self._cookies_src_rev["file"])
+            self._sync_cookies_widgets()
+
+    def _cookies_source_key(self) -> str:
+        raw = self.cookies_source_combo.get()
+        return self._cookies_src_map.get(raw, "none")
+
+    def _on_cookies_source_change(self, _choice: str | None = None) -> None:
+        self._sync_cookies_widgets()
+        self._schedule_preview()
+
+    def _sync_cookies_widgets(self) -> None:
+        use_file = self._cookies_source_key() == "file"
+        state = "normal" if use_file else "disabled"
+        try:
+            self.cookies_entry.configure(state=state)
+            self.cookies_browse_btn.configure(state=state)
+        except Exception:
+            pass
 
     def _browse_ytdlp(self) -> None:
         path = filedialog.askopenfilename(
@@ -432,7 +484,14 @@ class MainWindow(ctk.CTk):
             out = str(Path.home() / "Downloads")
         self.output_dir_var.set(out)
         self.output_tmpl_var.set(s.get("output_template") or "")
-        self.cookies_var.set(s.get("cookies_path") or "")
+        cookies_path = s.get("cookies_path") or ""
+        self.cookies_var.set(cookies_path)
+        src = (s.get("cookies_source") or "").strip().lower()
+        if src not in {"file", "chrome", "edge", "firefox", "none"}:
+            # Default: file if path non-empty else none
+            src = "file" if cookies_path.strip() else "none"
+        self.cookies_source_combo.set(self._cookies_src_rev.get(src, self._cookies_src_rev["none"]))
+        self._sync_cookies_widgets()
         ytdlp = (s.get("ytdlp_path") or "").strip()
         # Migrate old hard-coded default to managed bin
         if not ytdlp or ytdlp.lower() in {
@@ -477,6 +536,7 @@ class MainWindow(ctk.CTk):
             output_template=self.output_tmpl_var.get().strip(),
             format_shortcut=self._format_key(),
             cookies_path=self.cookies_var.get().strip(),
+            cookies_source=self._cookies_source_key(),
             option_values=self._collect_option_values(),
             catalog=self.catalog,
             deno_path=str(self._deno_path) if self._deno_path else None,
@@ -529,6 +589,7 @@ class MainWindow(ctk.CTk):
         return {
             "ytdlp_path": self.ytdlp_var.get().strip(),
             "cookies_path": self.cookies_var.get().strip(),
+            "cookies_source": self._cookies_source_key(),
             "output_dir": self.output_dir_var.get().strip(),
             "output_template": self.output_tmpl_var.get().strip(),
             "format_shortcut": self._format_key(),

@@ -38,6 +38,7 @@ def build_command(
     option_values: dict[str, Any],
     catalog: dict[str, Any],
     deno_path: str | None = None,
+    cookies_source: str | None = None,
 ) -> list[str]:
     """Return argv list (executable first)."""
     cmd: list[str] = [ytdlp_path or "yt-dlp"]
@@ -48,12 +49,22 @@ def build_command(
     if output_template:
         cmd.extend(["-o", output_template])
 
-    cookies = (cookies_path or "").strip()
-    if cookies and Path(cookies).is_file():
-        cmd.extend(["--cookies", cookies])
-    elif cookies:
-        # Still pass if user set a path (file may appear later)
-        cmd.extend(["--cookies", cookies])
+    # Cookies: browser XOR file (never both — yt-dlp rejects the combo)
+    source = (cookies_source or "").strip().lower()
+    if not source:
+        # Back-compat: infer from path if caller omitted cookies_source
+        source = "file" if (cookies_path or "").strip() else "none"
+    browser_names = {"chrome", "edge", "firefox"}
+    if source in browser_names:
+        cmd.extend(["--cookies-from-browser", source])
+    elif source == "file":
+        cookies = (cookies_path or "").strip()
+        if cookies and Path(cookies).is_file():
+            cmd.extend(["--cookies", cookies])
+        elif cookies:
+            # Still pass if user set a path (file may appear later)
+            cmd.extend(["--cookies", cookies])
+    # source == "none" (or unknown): omit both
 
     # Explicit Deno path for YouTube JS challenges (also keep managed bin on PATH)
     deno = (deno_path or "").strip()
@@ -91,7 +102,7 @@ def build_command(
     # Catalog options (skip presets handled specially; skip main_panel duplicates
     # for -o/-P/--cookies which we already set — unless user explicitly set them
     # and we want catalog to override? Prefer main panel for these.)
-    skip_flags = {"-o", "--output", "-P", "--paths", "--cookies"}
+    skip_flags = {"-o", "--output", "-P", "--paths", "--cookies", "--cookies-from-browser"}
 
     for section in catalog.get("sections", []):
         for opt in section.get("options", []):

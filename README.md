@@ -35,14 +35,14 @@ Ses+video birleştirmesi (merge) için ffmpeg yolu otomatik `PATH`e eklenir. You
 - **Kaynak:** Python 3.10+ (önerilen 3.13+)
 - **Manuel ffmpeg, yt-dlp veya Deno kurulumu gerekmez**
 
-İsteğe bağlı: çerez dosyası (`--cookies`) gelişmiş alanda seçilebilir.
+İsteğe bağlı: **Çerez kaynağı** — Dosya (cookies.txt), Chrome, Edge, Firefox veya Yok (--cookies / --cookies-from-browser).
 
 ## Özellikler
 
 - Ana akış: URL → **İndir**
 - Varsayılan çıktı klasörü: Kullanıcı `Downloads`
 - Yönetilen araçlar: `%LOCALAPPDATA%\yt-dlp-gui\bin\` (`yt-dlp.exe`, `ffmpeg.exe`, `ffprobe.exe`, `deno.exe`)
-- Gelişmiş: özel yt-dlp yolu, çerezler, tüm `yt-dlp` seçenek kataloğu, canlı komut önizlemesi
+- Gelişmiş: özel yt-dlp yolu, çerez kaynağı (dosya/Chrome/Edge/Firefox), tüm `yt-dlp` seçenek kataloğu, canlı komut önizlemesi
 - Alt süreç ile indirme; log; **İptal** Windows’ta `taskkill /F /T`
 - **Klasörü Aç** / **Oynat**: çıktı klasörünü ve son indirilen medyayı aç
 - Ayarlar: `%APPDATA%\yt-dlp-gui\settings.json`

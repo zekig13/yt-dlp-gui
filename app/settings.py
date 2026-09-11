@@ -22,6 +22,7 @@ def _default_ytdlp_path() -> str:
 DEFAULTS: dict[str, Any] = {
     "ytdlp_path": _default_ytdlp_path(),
     "cookies_path": "",
+    "cookies_source": "none",  # file | chrome | edge | firefox | none
     "output_dir": str(Path.home() / "Downloads"),
     "output_template": "%(title)s [%(id)s].%(ext)s",
     "format_shortcut": "best",
