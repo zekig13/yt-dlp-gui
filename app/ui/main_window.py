@@ -1,7 +1,10 @@
 """Main CustomTkinter window for yt-dlp GUI."""
 from __future__ import annotations
 
+import os
+import re
 import threading
+import time
 import tkinter as tk
 from pathlib import Path
 from tkinter import filedialog, messagebox
@@ -28,6 +31,30 @@ FORMAT_LABELS = [
     ("custom", "Özel (-f panelinden)"),
 ]
 
+_MEDIA_EXTS = {
+    ".mp4",
+    ".mkv",
+    ".webm",
+    ".mp3",
+    ".m4a",
+    ".opus",
+    ".flac",
+    ".wav",
+    ".avi",
+    ".mov",
+    ".m4v",
+    ".aac",
+    ".ogg",
+    ".wma",
+}
+
+_MEDIA_PATH_PATTERNS = (
+    re.compile(r"^\[download\] Destination:\s*(.+)$"),
+    re.compile(r"^\[ExtractAudio\] Destination:\s*(.+)$"),
+    re.compile(r'^\[Merger\] Merging formats into ["\'](.+)["\']\s*$'),
+    re.compile(r"^\[download\]\s+(.+?)\s+has already been downloaded"),
+)
+
 
 class MainWindow(ctk.CTk):
     def __init__(self) -> None:
@@ -45,6 +72,7 @@ class MainWindow(ctk.CTk):
         self._deps_busy = False
         self._bin_dir = managed_bin_dir()
         self._deno_path = tool_paths().deno
+        self._last_media_path: Path | None = None
 
         geo = self.settings.get("window_geometry") or "1100x780"
         try:
@@ -211,7 +239,7 @@ class MainWindow(ctk.CTk):
         # --- Bottom buttons ---
         bottom = ctk.CTkFrame(self)
         bottom.grid(row=2, column=0, sticky="ew", padx=10, pady=(4, 10))
-        bottom.grid_columnconfigure(4, weight=1)
+        bottom.grid_columnconfigure(6, weight=1)
 
         self.btn_run = ctk.CTkButton(
             bottom, text="İndir", width=140, command=self._start_download
@@ -220,22 +248,34 @@ class MainWindow(ctk.CTk):
         self.btn_cancel = ctk.CTkButton(
             bottom,
             text="İptal",
-            width=150,
+            width=100,
             fg_color="#a33",
             hover_color="#822",
             command=self._cancel_download,
             state="disabled",
         )
         self.btn_cancel.grid(row=0, column=1, padx=4)
+        self.btn_open_folder = ctk.CTkButton(
+            bottom, text="Klasörü Aç", width=110, command=self._open_output_folder
+        )
+        self.btn_open_folder.grid(row=0, column=2, padx=4)
+        self.btn_play = ctk.CTkButton(
+            bottom,
+            text="Oynat",
+            width=90,
+            command=self._play_last_media,
+            state="disabled",
+        )
+        self.btn_play.grid(row=0, column=3, padx=4)
         ctk.CTkButton(bottom, text="Ayarları Kaydet", width=120, command=self._save).grid(
-            row=0, column=2, padx=4
+            row=0, column=4, padx=4
         )
         ctk.CTkButton(
             bottom, text="Önizlemeyi Kopyala", width=140, command=self._copy_preview
-        ).grid(row=0, column=3, padx=4)
+        ).grid(row=0, column=5, padx=4)
         self.status_var = ctk.StringVar(value="Hazır")
         ctk.CTkLabel(bottom, textvariable=self.status_var, anchor="e").grid(
-            row=0, column=4, sticky="e", padx=8
+            row=0, column=6, sticky="e", padx=8
         )
 
     def _rebuild_log_tab(self, log_tab) -> None:
@@ -268,6 +308,98 @@ class MainWindow(ctk.CTk):
         path = filedialog.askdirectory(title="Çıktı klasörü")
         if path:
             self.output_dir_var.set(path)
+
+    def _open_output_folder(self) -> None:
+        out = self.output_dir_var.get().strip()
+        if not out:
+            out = str(Path.home() / "Downloads")
+        path = Path(out)
+        if not path.is_dir():
+            try:
+                path.mkdir(parents=True, exist_ok=True)
+            except OSError as exc:
+                messagebox.showerror("Klasör", f"Klasör açılamadı:\n{exc}")
+                self.status_var.set("Klasör açılamadı")
+                return
+        try:
+            os.startfile(str(path))  # type: ignore[attr-defined]
+            self.status_var.set(f"Klasör açıldı: {path}")
+        except OSError as exc:
+            messagebox.showerror("Klasör", str(exc))
+            self.status_var.set("Klasör açılamadı")
+
+    def _play_last_media(self) -> None:
+        path = self._last_media_path
+        if path is None or not path.is_file():
+            self.status_var.set("Oynatılacak dosya yok — önce bir indirme tamamlayın")
+            messagebox.showinfo(
+                "Oynat",
+                "Henüz oynatılacak bir medya dosyası yok.\nÖnce bir indirme tamamlayın.",
+            )
+            return
+        try:
+            os.startfile(str(path))  # type: ignore[attr-defined]
+            self.status_var.set(f"Açıldı: {path.name}")
+        except OSError as exc:
+            messagebox.showerror("Oynat", str(exc))
+            self.status_var.set("Dosya açılamadı")
+
+    def _update_play_button(self) -> None:
+        path = self._last_media_path
+        if path is not None and path.is_file():
+            self.btn_play.configure(state="normal")
+        else:
+            self.btn_play.configure(state="disabled")
+
+    def _resolve_media_path(self, raw: str) -> Path:
+        cleaned = raw.strip().strip('"').strip("'")
+        p = Path(cleaned)
+        if not p.is_absolute():
+            out = self.output_dir_var.get().strip()
+            if out:
+                p = Path(out) / p
+        return p
+
+    def _track_media_from_log(self, line: str) -> None:
+        stripped = line.strip()
+        for pat in _MEDIA_PATH_PATTERNS:
+            m = pat.search(stripped)
+            if not m:
+                continue
+            self._last_media_path = self._resolve_media_path(m.group(1))
+            self.after(0, self._update_play_button)
+            return
+
+    def _fallback_find_latest_media(self) -> None:
+        out = self.output_dir_var.get().strip()
+        if not out:
+            return
+        root = Path(out)
+        if not root.is_dir():
+            return
+        now = time.time()
+        window_sec = 5 * 60
+        newest: Path | None = None
+        newest_mtime = 0.0
+        try:
+            for candidate in root.rglob("*"):
+                if not candidate.is_file():
+                    continue
+                if candidate.suffix.lower() not in _MEDIA_EXTS:
+                    continue
+                try:
+                    mtime = candidate.stat().st_mtime
+                except OSError:
+                    continue
+                if now - mtime > window_sec:
+                    continue
+                if mtime > newest_mtime:
+                    newest_mtime = mtime
+                    newest = candidate
+        except OSError:
+            return
+        if newest is not None:
+            self._last_media_path = newest
 
     def _browse_cookies(self) -> None:
         path = filedialog.askopenfilename(
@@ -539,6 +671,8 @@ class MainWindow(ctk.CTk):
         self.log_box.configure(state="normal")
         self.log_box.delete("1.0", "end")
         self.log_box.configure(state="disabled")
+        self._last_media_path = None
+        self._update_play_button()
         self._append_log("$ " + command_preview(argv))
         self._append_log(f"[PATH += {self._bin_dir}]")
         if self._deno_path and Path(self._deno_path).is_file():
@@ -557,6 +691,7 @@ class MainWindow(ctk.CTk):
                 cwd = None
 
         def on_line(line: str) -> None:
+            self._track_media_from_log(line)
             self.after(0, lambda l=line: self._append_log(l))
 
         def on_done(code: int | None) -> None:
@@ -580,9 +715,15 @@ class MainWindow(ctk.CTk):
         self.btn_run.configure(state="normal")
         self.btn_cancel.configure(state="disabled")
         if code == 0:
+            if self._last_media_path is None or not self._last_media_path.is_file():
+                self._fallback_find_latest_media()
+            self._update_play_button()
             self.status_var.set("Tamamlandı (0)")
             self._append_log(f"\n[çıkış kodu: {code}]")
+            if self._last_media_path is not None and self._last_media_path.is_file():
+                self._append_log(f"[son medya: {self._last_media_path}]")
         else:
+            self._update_play_button()
             self.status_var.set(f"Bitti (kod {code})")
             self._append_log(f"\n[çıkış kodu: {code}]")
 

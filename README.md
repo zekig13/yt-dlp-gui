@@ -44,6 +44,7 @@ Ses+video birleştirmesi (merge) için ffmpeg yolu otomatik `PATH`e eklenir. You
 - Yönetilen araçlar: `%LOCALAPPDATA%\yt-dlp-gui\bin\` (`yt-dlp.exe`, `ffmpeg.exe`, `ffprobe.exe`, `deno.exe`)
 - Gelişmiş: özel yt-dlp yolu, çerezler, tüm `yt-dlp` seçenek kataloğu, canlı komut önizlemesi
 - Alt süreç ile indirme; log; **İptal** Windows’ta `taskkill /F /T`
+- **Klasörü Aç** / **Oynat**: çıktı klasörünü ve son indirilen medyayı aç
 - Ayarlar: `%APPDATA%\yt-dlp-gui\settings.json`
 
 ## Araçları yenileme
