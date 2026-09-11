@@ -18,21 +18,21 @@ from app.ui.option_widgets import SectionFrame
 
 FORMAT_LABELS = [
     ("best", "En iyi (bv*+ba/b)"),
-    ("bestvideo+bestaudio", "bestvideo+bestaudio"),
+    ("bestvideo+bestaudio", "En iyi video + ses"),
     ("mp4", "MP4 tercih"),
     ("webm", "WebM tercih"),
-    ("audio-best", "Sadece ses (best)"),
+    ("audio-best", "Yalnızca ses (en iyi)"),
     ("mp3", "MP3 ses"),
     ("m4a", "M4A ses"),
-    ("worst", "En düşük"),
-    ("custom", "Özel (-f panelden)"),
+    ("worst", "En düşük kalite"),
+    ("custom", "Özel (-f panelinden)"),
 ]
 
 
 class MainWindow(ctk.CTk):
     def __init__(self) -> None:
         super().__init__()
-        self.title("yt-dlp GUI — İndirici")
+        self.title("yt-dlp GUI — Video İndirici")
         self.minsize(960, 640)
 
         self.settings = load_settings()
@@ -168,7 +168,7 @@ class MainWindow(ctk.CTk):
         self.tabs = ctk.CTkTabview(self)
         self.tabs.grid(row=1, column=0, sticky="nsew", padx=10, pady=4)
         self.tabs.add("Tüm Seçenekler")
-        self.tabs.add("Komut & Log")
+        self.tabs.add("Komut ve Günlük")
 
         opt_tab = self.tabs.tab("Tüm Seçenekler")
         opt_tab.grid_columnconfigure(0, weight=1)
@@ -182,7 +182,7 @@ class MainWindow(ctk.CTk):
         self.search_entry = ctk.CTkEntry(
             search_row,
             textvariable=self.search_var,
-            placeholder_text="bayrak, açıklama veya bölüm…",
+            placeholder_text="bayrak, açıklama veya bölüm ara…",
         )
         self.search_entry.grid(row=0, column=1, sticky="ew")
         self.search_var.trace_add("write", lambda *_: self._apply_search())
@@ -204,7 +204,7 @@ class MainWindow(ctk.CTk):
         self.search_count.configure(text=f"{nopt} seçenek")
 
         # Log tab
-        log_tab = self.tabs.tab("Komut & Log")
+        log_tab = self.tabs.tab("Komut ve Günlük")
         self._rebuild_log_tab(log_tab)
 
         # --- Bottom buttons ---
@@ -218,7 +218,7 @@ class MainWindow(ctk.CTk):
         self.btn_run.grid(row=0, column=0, padx=4)
         self.btn_cancel = ctk.CTkButton(
             bottom,
-            text="İptal (süreç ağacı)",
+            text="İptal",
             width=150,
             fg_color="#a33",
             hover_color="#822",
@@ -247,7 +247,7 @@ class MainWindow(ctk.CTk):
         prev_frame.grid(row=0, column=0, sticky="ew", pady=(4, 4))
         prev_frame.grid_columnconfigure(0, weight=1)
         ctk.CTkLabel(
-            prev_frame, text="Komut önizleme (canlı)", font=ctk.CTkFont(weight="bold")
+            prev_frame, text="Komut önizlemesi (canlı)", font=ctk.CTkFont(weight="bold")
         ).grid(row=0, column=0, sticky="w")
         self.preview_box = ctk.CTkTextbox(prev_frame, height=110, wrap="word")
         self.preview_box.grid(row=1, column=0, sticky="ew", pady=4)
@@ -292,8 +292,8 @@ class MainWindow(ctk.CTk):
 
     def _load_into_ui(self) -> None:
         s = self.settings
+        # Always start with an empty URL box (do not restore previous urls)
         self.urls_text.delete("1.0", "end")
-        self.urls_text.insert("1.0", s.get("urls") or "")
         out = (s.get("output_dir") or "").strip()
         if not out:
             out = str(Path.home() / "Downloads")
@@ -398,7 +398,7 @@ class MainWindow(ctk.CTk):
             "output_dir": self.output_dir_var.get().strip(),
             "output_template": self.output_tmpl_var.get().strip(),
             "format_shortcut": self._format_key(),
-            "urls": self.urls_text.get("1.0", "end").rstrip("\n"),
+            "urls": "",  # never persist URLs across launches
             "window_geometry": self.geometry(),
             "appearance_mode": self.settings.get("appearance_mode") or "System",
             "color_theme": self.settings.get("color_theme") or "blue",
@@ -528,7 +528,7 @@ class MainWindow(ctk.CTk):
             return
 
         argv = self._current_argv()
-        self.tabs.set("Komut & Log")
+        self.tabs.set("Komut ve Günlük")
         self._update_preview()
         self.log_box.configure(state="normal")
         self.log_box.delete("1.0", "end")

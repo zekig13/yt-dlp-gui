@@ -19,7 +19,8 @@
           "type": "bool",
           "help": "Print this help text and exit",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bu yardım metnini yazdırır ve çıkar"
         },
         {
           "id": "version",
@@ -31,7 +32,8 @@
           "type": "bool",
           "help": "Print program version and exit",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Program sürümünü yazdırır ve çıkar"
         },
         {
           "id": "update",
@@ -44,7 +46,8 @@
           "type": "bool",
           "help": "Update this program to the latest stable version",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Programı en son kararlı sürüme günceller"
         },
         {
           "id": "no_update",
@@ -56,7 +59,8 @@
           "type": "bool",
           "help": "Do not check for updates (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Güncelleme denetimi yapmaz (varsayılan)"
         },
         {
           "id": "update_to",
@@ -68,7 +72,8 @@
           "type": "value",
           "help": "Upgrade/downgrade to a specific version. CHANNEL can be a repository as well. CHANNEL and TAG default to \"stable\" and \"latest\" respectively if omitted; See \"UPDATE\" for details. Supported channels: stable, nightly, master",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Belirli bir sürüme yükseltir/düşürür. CHANNEL bir depo da olabilir. CHANNEL ve TAG verilmezse sırasıyla \"stable\" ve \"latest\" kullanılır. Desteklenen kanallar: stable, nightly, master"
         },
         {
           "id": "ignore_errors",
@@ -81,7 +86,8 @@
           "type": "bool",
           "help": "Ignore download and postprocessing errors. The download will be considered successful even if the postprocessing fails",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İndirme ve son işleme hatalarını yok sayar. Son işleme başarısız olsa bile indirme başarılı sayılır"
         },
         {
           "id": "no_abort_on_error",
@@ -93,7 +99,8 @@
           "type": "bool",
           "help": "Continue with next video on download errors; e.g. to skip unavailable videos in a playlist (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İndirme hatasında sonraki videoya devam eder; örneğin oynatma listesindeki eksik videoları atlamak için (varsayılan)"
         },
         {
           "id": "abort_on_error",
@@ -105,7 +112,8 @@
           "type": "bool",
           "help": "Abort downloading of further videos if an error occurs (Alias: --no-ignore-errors)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Hata olursa sonraki videoların indirilmesini durdurur (--no-ignore-errors takma adı)"
         },
         {
           "id": "list_extractors",
@@ -117,7 +125,8 @@
           "type": "bool",
           "help": "List all supported extractors and exit",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Desteklenen tüm çıkarıcıları listeler ve çıkar"
         },
         {
           "id": "extractor_descriptions",
@@ -129,7 +138,8 @@
           "type": "bool",
           "help": "Output descriptions of all supported extractors and exit",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Desteklenen tüm çıkarıcıların açıklamalarını yazar ve çıkar"
         },
         {
           "id": "use_extractors",
@@ -141,7 +151,8 @@
           "type": "value",
           "help": "Extractor names to use separated by commas. You can also use regexes, \"all\", \"default\" and \"end\" (end URL matching); e.g. --ies \"holodex.*,end,youtube\". Prefix the name with a \"-\" to exclude it, e.g. --ies default,-generic. Use --list-extractors for a list of extractor names. (Alias: --ies)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Kullanılacak çıkarıcı adları (virgülle). Regex, \"all\", \"default\" ve \"end\" de kullanılabilir. Adın başına \"-\" koyarak hariç tutabilirsiniz. (Takma ad: --ies)"
         },
         {
           "id": "default_search",
@@ -153,7 +164,8 @@
           "type": "value",
           "help": "Use this prefix for unqualified URLs. E.g. \"gvsearch2:python\" downloads two videos from google videos for the search term \"python\". Use the value \"auto\" to let yt-dlp guess (\"auto_warning\" to emit a warning when guessing). \"error\" just throws an error. The default value \"fixup_error\" repairs broken URLs, but emits an error if this is not possible instead of searching",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tam olmayan URL'ler için önek. Örn. \"gvsearch2:python\". \"auto\" tahmin ettirir; \"error\" hata verir. Varsayılan \"fixup_error\" bozuk URL'leri onarmaya çalışır"
         },
         {
           "id": "ignore_config",
@@ -165,7 +177,8 @@
           "type": "bool",
           "help": "Don't load any more configuration files except those given to --config-locations. For backward compatibility, if this option is found inside the system configuration file, the user configuration is not loaded. (Alias: --no-config)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "--config-locations ile verilenler dışında başka yapılandırma dosyası yüklemez. (Takma ad: --no-config)"
         },
         {
           "id": "no_config_locations",
@@ -177,7 +190,8 @@
           "type": "bool",
           "help": "Do not load any custom configuration files (default). When given inside a configuration file, ignore all previous --config-locations defined in the current file",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Özel yapılandırma dosyası yüklemez (varsayılan). Yapılandırma dosyası içinde kullanılırsa önceki --config-locations yok sayılır"
         },
         {
           "id": "config_locations",
@@ -189,7 +203,8 @@
           "type": "value",
           "help": "Location of the main configuration file; either the path to the config or its containing directory (\"-\" for stdin). Can be used multiple times and inside other configuration files",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Ana yapılandırma dosyasının yolu veya içeren klasör (\"-\" = stdin). Birden çok kez kullanılabilir"
         },
         {
           "id": "plugin_dirs",
@@ -201,7 +216,8 @@
           "type": "value",
           "help": "Path to an additional directory to search for plugins. This option can be used multiple times to add multiple directories. Use \"default\" to search the default plugin directories (default)",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Eklenti aranacak ek klasör. Birden çok kez eklenebilir. \"default\" varsayılan eklenti klasörlerini arar"
         },
         {
           "id": "no_plugin_dirs",
@@ -213,7 +229,8 @@
           "type": "bool",
           "help": "Clear plugin directories to search, including defaults and those provided by previous --plugin-dirs",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Varsayılanlar ve önceki --plugin-dirs dahil eklenti arama klasörlerini temizler"
         },
         {
           "id": "js_runtimes",
@@ -225,7 +242,8 @@
           "type": "value",
           "help": "Additional JavaScript runtime to enable, with an optional location for the runtime (either the path to the binary or its containing directory). This option can be used multiple times to enable multiple runtimes. Supported runtimes are (in order of priority, from highest to lowest): deno, node, quickjs, bun. Only \"deno\" is enabled by default. The highest priority runtime that is both enabled and available will be used. In order to use a lower priority runtime when \"deno\" is available, --no-js- runtimes needs to be passed before enabling other runtimes",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Ek JavaScript çalışma zamanı (isteğe bağlı yol ile). Öncelik: deno, node, quickjs, bun. Varsayılan yalnızca \"deno\". Birden çok kez kullanılabilir"
         },
         {
           "id": "no_js_runtimes",
@@ -237,7 +255,8 @@
           "type": "bool",
           "help": "Clear JavaScript runtimes to enable, including defaults and those provided by previous --js-runtimes",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Varsayılanlar ve önceki --js-runtimes dahil JS çalışma zamanlarını temizler"
         },
         {
           "id": "remote_components",
@@ -249,7 +268,8 @@
           "type": "value",
           "help": "Remote components to allow yt-dlp to fetch when required. This option is currently not needed if you are using an official executable or have the requisite version of the yt-dlp-ejs package installed. You can use this option multiple times to allow multiple components. Supported values: ejs:npm (external JavaScript components from npm), ejs:github (external JavaScript components from yt-dlp-ejs GitHub). By default, no remote components are allowed",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Gerektiğinde indirilmesine izin verilen uzak bileşenler (ör. ejs:npm, ejs:github). Varsayılan olarak uzak bileşene izin yok"
         },
         {
           "id": "no_remote_components",
@@ -261,7 +281,8 @@
           "type": "bool",
           "help": "Disallow fetching of all remote components, including any previously allowed by --remote-components or defaults.",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tüm uzak bileşen indirmelerini yasaklar"
         },
         {
           "id": "flat_playlist",
@@ -273,7 +294,8 @@
           "type": "bool",
           "help": "Do not extract a playlist's URL result entries; some entry metadata may be missing and downloading may be bypassed",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Oynatma listesi girdilerinin URL sonuçlarını çıkarmaz; bazı meta veriler eksik olabilir"
         },
         {
           "id": "no_flat_playlist",
@@ -285,7 +307,8 @@
           "type": "bool",
           "help": "Fully extract the videos of a playlist (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Oynatma listesindeki videoları tam olarak çıkarır (varsayılan)"
         },
         {
           "id": "live_from_start",
@@ -297,7 +320,8 @@
           "type": "bool",
           "help": "Download livestreams from the start. Currently experimental and only supported for YouTube, Twitch, TVer, and mellow-fan",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Canlı yayınları başından indirir (deneysel; YouTube, Twitch, TVer, mellow-fan)"
         },
         {
           "id": "no_live_from_start",
@@ -309,7 +333,8 @@
           "type": "bool",
           "help": "Download livestreams from the current time (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Canlı yayınları geçerli andan itibaren indirir (varsayılan)"
         },
         {
           "id": "wait_for_video",
@@ -321,7 +346,8 @@
           "type": "value",
           "help": "Wait for scheduled streams to become available. Pass the minimum number of seconds (or range) to wait between retries",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Zamanlanmış yayınların hazır olmasını bekler. Denemeler arası minimum saniye (veya aralık)"
         },
         {
           "id": "no_wait_for_video",
@@ -333,7 +359,8 @@
           "type": "bool",
           "help": "Do not wait for scheduled streams (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Zamanlanmış yayınları beklemez (varsayılan)"
         },
         {
           "id": "mark_watched",
@@ -345,7 +372,8 @@
           "type": "bool",
           "help": "Mark videos watched (even with --simulate)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Videoları izlenmiş işaretler (--simulate ile bile)"
         },
         {
           "id": "no_mark_watched",
@@ -357,7 +385,8 @@
           "type": "bool",
           "help": "Do not mark videos watched (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Videoları izlenmiş işaretlemez (varsayılan)"
         },
         {
           "id": "color",
@@ -373,7 +402,8 @@
           "choices": [
             "always",
             "auto"
-          ]
+          ],
+          "help_tr": "Çıktıda renk kodları kullanılsın mı: always, auto (varsayılan), never veya no_color. İsteğe bağlı STREAM öneki (stdout/stderr). Birden çok kez kullanılabilir"
         },
         {
           "id": "compat_options",
@@ -385,7 +415,8 @@
           "type": "value",
           "help": "Options that can help keep compatibility with youtube-dl or youtube-dlc configurations by reverting some of the changes made in yt-dlp. See \"Differences in default behavior\" for details",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "youtube-dl / youtube-dlc uyumluluğu için yt-dlp değişikliklerini geri alan seçenekler"
         },
         {
           "id": "alias",
@@ -397,7 +428,8 @@
           "type": "value",
           "help": "Create aliases for an option string. Unless an alias starts with a dash \"-\", it is prefixed with \"--\". Arguments are parsed according to the Python string formatting mini-language. E.g. --alias get-audio,-X \"-S aext:{0},abr -x --audio-format {0}\" creates options \"--get-audio\" and \"-X\" that takes an argument (ARG0) and expands to \"-S aext:ARG0,abr -x --audio-format ARG0\". All defined aliases are listed in the --help output. Alias options can trigger more aliases; so be careful to avoid defining recursive options. As a safety measure, each alias may be triggered a maximum of 100 times. This option can be used multiple times",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bir seçenek dizisi için takma ad oluşturur. Örn. --alias get-audio \"-x --audio-format {0}\". En fazla 100 tetikleme güvenliği vardır. Birden çok kez kullanılabilir"
         },
         {
           "id": "preset_alias",
@@ -410,7 +442,8 @@
           "type": "value",
           "help": "Applies a predefined set of options. e.g. --preset-alias mp3. The following presets are available: mp3, aac, mp4, mkv, sleep. See the \"Preset Aliases\" section at the end for more info. This option can be used multiple times",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Hazır seçenek seti uygular (mp3, aac, mp4, mkv, sleep). Birden çok kez kullanılabilir"
         }
       ]
     },
@@ -429,7 +462,8 @@
           "type": "value",
           "help": "Use the specified HTTP/HTTPS/SOCKS proxy. To enable SOCKS proxy, specify a proper scheme, e.g. socks5://user:pass@127.0.0.1:1080/. Pass in an empty string (--proxy \"\") for direct connection",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "HTTP/HTTPS/SOCKS vekil sunucusu. SOCKS için örn. socks5://kullanici:sifre@127.0.0.1:1080/. Doğrudan bağlantı için boş dize"
         },
         {
           "id": "socket_timeout",
@@ -441,7 +475,8 @@
           "type": "value",
           "help": "Time to wait before giving up, in seconds",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Vazgeçmeden önce beklenecek süre (saniye)"
         },
         {
           "id": "source_address",
@@ -453,7 +488,8 @@
           "type": "value",
           "help": "Client-side IP address to bind to",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bağlanılacak istemci tarafı IP adresi"
         },
         {
           "id": "impersonate",
@@ -465,7 +501,8 @@
           "type": "value",
           "help": "Client to impersonate for requests. E.g. chrome, chrome-110, chrome:windows-10. Pass --impersonate=\"\" to impersonate any client. Note that forcing impersonation for all requests may have a detrimental impact on download speed and stability",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İsteklerde taklit edilecek istemci (chrome, chrome-110 vb.). Boş dize herhangi bir istemciyi taklit eder"
         },
         {
           "id": "list_impersonate_targets",
@@ -477,7 +514,8 @@
           "type": "bool",
           "help": "List available clients to impersonate.",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Taklit edilebilecek istemcileri listeler"
         },
         {
           "id": "force_ipv4",
@@ -490,7 +528,8 @@
           "type": "bool",
           "help": "Make all connections via IPv4",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tüm bağlantıları IPv4 üzerinden yapar"
         },
         {
           "id": "force_ipv6",
@@ -503,7 +542,8 @@
           "type": "bool",
           "help": "Make all connections via IPv6",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tüm bağlantıları IPv6 üzerinden yapar"
         },
         {
           "id": "enable_file_urls",
@@ -515,7 +555,8 @@
           "type": "bool",
           "help": "Enable file:// URLs. This is disabled by default for security reasons.",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "file:// URL'lerini etkinleştirir (güvenlik nedeniyle varsayılan kapalı)"
         }
       ]
     },
@@ -534,7 +575,8 @@
           "type": "value",
           "help": "Use this proxy to verify the IP address for some geo-restricted sites. The default proxy specified by --proxy (or none, if the option is not present) is used for the actual downloading",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Coğrafi kısıtlı sitelerde IP doğrulaması için vekil. Asıl indirme --proxy ile yapılır"
         },
         {
           "id": "xff",
@@ -546,7 +588,8 @@
           "type": "value",
           "help": "How to fake X-Forwarded-For HTTP header to try bypassing geographic restriction. One of \"default\" (only when known to be useful), \"never\", an IP block in CIDR notation, or a two-letter ISO 3166-2 country code",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Coğrafi kısıtlamayı aşmak için X-Forwarded-For sahteciliği: default, never, CIDR IP bloğu veya ISO ülke kodu"
         }
       ]
     },
@@ -566,7 +609,8 @@
           "type": "value",
           "help": "Comma-separated playlist_index of the items to download. You can specify a range using \"[START]:[STOP][:STEP]\". For backward compatibility, START-STOP is also supported. Use negative indices to count from the right and negative STEP to download in reverse order. E.g. \"-I 1:3,7,-5::2\" used on a playlist of size 15 will download the items at index 1,2,3,7,11,13,15",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İndirilecek oynatma listesi indeksleri (virgülle). Aralık: [START]:[STOP][:STEP]. Negatif indeks sondan sayar"
         },
         {
           "id": "min_filesize",
@@ -578,7 +622,8 @@
           "type": "value",
           "help": "Abort download if filesize is smaller than SIZE, e.g. 50k or 44.6M",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dosya boyutu SIZE'dan küçükse indirmeyi iptal eder (örn. 50k, 44.6M)"
         },
         {
           "id": "max_filesize",
@@ -590,7 +635,8 @@
           "type": "value",
           "help": "Abort download if filesize is larger than SIZE, e.g. 50k or 44.6M",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dosya boyutu SIZE'dan büyükse indirmeyi iptal eder (örn. 50k, 44.6M)"
         },
         {
           "id": "date",
@@ -602,7 +648,8 @@
           "type": "value",
           "help": "Download only videos uploaded on this date. The date can be \"YYYYMMDD\" or in the format [now|today|yesterday][- N[day|week|month|year]]. E.g. \"--date today-2weeks\" downloads only videos uploaded on the same day two weeks ago",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Yalnızca bu tarihte yüklenen videoları indirir (YYYYMMDD veya today-2weeks gibi)"
         },
         {
           "id": "datebefore",
@@ -614,7 +661,8 @@
           "type": "value",
           "help": "Download only videos uploaded on or before this date. The date formats accepted are the same as --date",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bu tarihte veya öncesinde yüklenen videoları indirir (--date ile aynı biçimler)"
         },
         {
           "id": "dateafter",
@@ -626,7 +674,8 @@
           "type": "value",
           "help": "Download only videos uploaded on or after this date. The date formats accepted are the same as --date",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bu tarihte veya sonrasında yüklenen videoları indirir (--date ile aynı biçimler)"
         },
         {
           "id": "match_filters",
@@ -638,7 +687,8 @@
           "type": "value",
           "help": "Generic video filter. Any \"OUTPUT TEMPLATE\" field can be compared with a number or a string using the operators defined in \"Filtering Formats\". You can also simply specify a field to match if the field is present, use \"!field\" to check if the field is not present, and \"&\" to check multiple conditions. Use a \"\\\" to escape \"&\" or quotes if needed. If used multiple times, the filter matches if at least one of the conditions is met. E.g. --match-filters !is_live --match-filters \"like_count>?100 & description~='(?i)\\bcats \\& dogs\\b'\" matches only videos that are not live OR those that have a like count more than 100 (or the like field is not available) and also has a description that contains the phrase \"cats & dogs\" (caseless). Use \"--match-filters -\" to interactively ask whether to download each video",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Genel video süzgeci. Alan karşılaştırması, !alan, & ile birleşik koşullar. Birden çok kez OR gibi davranır. \"-\" ile etkileşimli sorar"
         },
         {
           "id": "no_match_filters",
@@ -650,7 +700,8 @@
           "type": "bool",
           "help": "Do not use any --match-filters (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "--match-filters kullanmaz (varsayılan)"
         },
         {
           "id": "break_match_filters",
@@ -662,7 +713,8 @@
           "type": "value",
           "help": "Same as \"--match-filters\" but stops the download process when a video is rejected",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "--match-filters gibi ama video reddedilince indirmeyi durdurur"
         },
         {
           "id": "no_break_match_filters",
@@ -674,7 +726,8 @@
           "type": "bool",
           "help": "Do not use any --break-match-filters (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "--break-match-filters kullanmaz (varsayılan)"
         },
         {
           "id": "no_playlist",
@@ -686,7 +739,8 @@
           "type": "bool",
           "help": "Download only the video, if the URL refers to a video and a playlist",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "URL hem video hem listedeyse yalnızca videoyu indirir"
         },
         {
           "id": "yes_playlist",
@@ -698,7 +752,8 @@
           "type": "bool",
           "help": "Download the playlist, if the URL refers to a video and a playlist",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "URL hem video hem listedeyse oynatma listesini indirir"
         },
         {
           "id": "age_limit",
@@ -710,7 +765,8 @@
           "type": "value",
           "help": "Download only videos suitable for the given age",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Yalnızca verilen yaşa uygun videoları indirir"
         },
         {
           "id": "download_archive",
@@ -722,7 +778,8 @@
           "type": "value",
           "help": "Download only videos not listed in the archive file. Record the IDs of all downloaded videos in it",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Arşiv dosyasında olmayan videoları indirir; indirilen kimlikleri kaydeder"
         },
         {
           "id": "no_download_archive",
@@ -734,7 +791,8 @@
           "type": "bool",
           "help": "Do not use archive file (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Arşiv dosyası kullanmaz (varsayılan)"
         },
         {
           "id": "max_downloads",
@@ -746,7 +804,8 @@
           "type": "value",
           "help": "Abort after downloading NUMBER files",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "NUMBER dosya indirdikten sonra durur"
         },
         {
           "id": "break_on_existing",
@@ -758,7 +817,8 @@
           "type": "bool",
           "help": "Stop the download process when encountering a file that is in the archive supplied with the --download-archive option",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Arşivde bulunan bir dosyayla karşılaşınca indirmeyi durdurur"
         },
         {
           "id": "no_break_on_existing",
@@ -770,7 +830,8 @@
           "type": "bool",
           "help": "Do not stop the download process when encountering a file that is in the archive (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Arşivde bulunan dosyada durmaz (varsayılan)"
         },
         {
           "id": "break_per_input",
@@ -782,7 +843,8 @@
           "type": "bool",
           "help": "Alters --max-downloads, --break-on-existing, --break-match-filters, and autonumber to reset per input URL",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "--max-downloads, --break-on-existing vb. sayaçlarını her giriş URL'sinde sıfırlar"
         },
         {
           "id": "no_break_per_input",
@@ -794,7 +856,8 @@
           "type": "bool",
           "help": "--break-on-existing and similar options terminates the entire download queue",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "--break-on-existing benzeri seçenekler tüm indirme kuyruğunu sonlandırır"
         },
         {
           "id": "skip_playlist_after_errors",
@@ -806,7 +869,8 @@
           "type": "value",
           "help": "Number of allowed failures until the rest of the playlist is skipped",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bu kadar hatadan sonra oynatma listesinin geri kalanı atlanır"
         }
       ]
     },
@@ -826,7 +890,8 @@
           "type": "value",
           "help": "Number of fragments of a dash/hlsnative video that should be downloaded concurrently (default is 1)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "DASH/HLS parçalarının eşzamanlı indirme sayısı (varsayılan 1)"
         },
         {
           "id": "limit_rate",
@@ -839,7 +904,8 @@
           "type": "value",
           "help": "Maximum download rate in bytes per second, e.g. 50K or 4.2M",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "En yüksek indirme hızı (bayt/sn), örn. 50K veya 4.2M"
         },
         {
           "id": "throttled_rate",
@@ -851,7 +917,8 @@
           "type": "value",
           "help": "Minimum download rate in bytes per second below which throttling is assumed and the video data is re-extracted, e.g. 100K",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bu hızın altına düşünce kısıtlama varsayılır ve veri yeniden çıkarılır (örn. 100K)"
         },
         {
           "id": "retries",
@@ -864,7 +931,8 @@
           "type": "value",
           "help": "Number of retries (default is 10), or \"infinite\"",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Yeniden deneme sayısı (varsayılan 10) veya \"infinite\""
         },
         {
           "id": "file_access_retries",
@@ -876,7 +944,8 @@
           "type": "value",
           "help": "Number of times to retry on file access error (default is 3), or \"infinite\"",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dosya erişim hatasında deneme sayısı (varsayılan 3) veya \"infinite\""
         },
         {
           "id": "fragment_retries",
@@ -888,7 +957,8 @@
           "type": "value",
           "help": "Number of retries for a fragment (default is 10), or \"infinite\" (DASH, hlsnative and ISM)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Parça için deneme sayısı (varsayılan 10) veya \"infinite\""
         },
         {
           "id": "retry_sleep",
@@ -900,7 +970,8 @@
           "type": "value",
           "help": "Time to sleep between retries in seconds (optionally) prefixed by the type of retry (http (default), fragment, file_access, extractor) to apply the sleep to. EXPR can be a number, linear=START[:END[:STEP=1]] or exp=START[:END[:BASE=2]]. This option can be used multiple times to set the sleep for the different retry types, e.g. --retry-sleep linear=1::2 --retry-sleep fragment:exp=1:20",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Denemeler arası bekleme (sn); isteğe bağlı http/fragment/file_access/extractor öneki. linear= veya exp= ifadeleri desteklenir"
         },
         {
           "id": "skip_unavailable_fragments",
@@ -912,7 +983,8 @@
           "type": "bool",
           "help": "Skip unavailable fragments for DASH, hlsnative and ISM downloads (default) (Alias: --no-abort-on-unavailable-fragments)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "DASH/HLS/ISM'de eksik parçaları atlar (varsayılan)"
         },
         {
           "id": "abort_on_unavailable_fragments",
@@ -924,7 +996,8 @@
           "type": "bool",
           "help": "Abort download if a fragment is unavailable (Alias: --no-skip-unavailable-fragments)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bir parça yoksa indirmeyi iptal eder"
         },
         {
           "id": "keep_fragments",
@@ -936,7 +1009,8 @@
           "type": "bool",
           "help": "Keep downloaded fragments on disk after downloading is finished",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İndirme bitince parçaları diskte tutar"
         },
         {
           "id": "no_keep_fragments",
@@ -948,7 +1022,8 @@
           "type": "bool",
           "help": "Delete downloaded fragments after downloading is finished (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İndirme bitince parçaları siler (varsayılan)"
         },
         {
           "id": "buffer_size",
@@ -960,7 +1035,8 @@
           "type": "value",
           "help": "Size of download buffer, e.g. 1024 or 16K (default is 1024)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İndirme tampon boyutu, örn. 1024 veya 16K (varsayılan 1024)"
         },
         {
           "id": "resize_buffer",
@@ -972,7 +1048,8 @@
           "type": "bool",
           "help": "The buffer size is automatically resized from an initial value of --buffer-size (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tampon boyutunu --buffer-size'dan başlayarak otomatik ayarlar (varsayılan)"
         },
         {
           "id": "no_resize_buffer",
@@ -984,7 +1061,8 @@
           "type": "bool",
           "help": "Do not automatically adjust the buffer size",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tampon boyutunu otomatik ayarlamaz"
         },
         {
           "id": "http_chunk_size",
@@ -996,7 +1074,8 @@
           "type": "value",
           "help": "Size of a chunk for chunk-based HTTP downloading, e.g. 10485760 or 10M (default is disabled). May be useful for bypassing bandwidth throttling imposed by a webserver (experimental)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Parçalı HTTP indirme boyutu, örn. 10M (varsayılan kapalı; deneysel)"
         },
         {
           "id": "playlist_random",
@@ -1008,7 +1087,8 @@
           "type": "bool",
           "help": "Download playlist videos in random order",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Oynatma listesini rastgele sırada indirir"
         },
         {
           "id": "lazy_playlist",
@@ -1020,7 +1100,8 @@
           "type": "bool",
           "help": "Process entries in the playlist as they are received. This disables n_entries, --playlist-random and --playlist-reverse",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Liste girdilerini geldikçe işler; n_entries, --playlist-random ve --playlist-reverse'i kapatır"
         },
         {
           "id": "no_lazy_playlist",
@@ -1032,7 +1113,8 @@
           "type": "bool",
           "help": "Process videos in the playlist only after the entire playlist is parsed (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tüm liste ayrıştırıldıktan sonra işler (varsayılan)"
         },
         {
           "id": "hls_use_mpegts",
@@ -1044,7 +1126,8 @@
           "type": "bool",
           "help": "Use the mpegts container for HLS videos; allowing some players to play the video while downloading, and reducing the chance of file corruption if download is interrupted. This is enabled by default for live streams",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "HLS için mpegts kabı kullanır; indirme sırasında oynatma ve kesintiye karşı daha dayanıklı (canlıda varsayılan)"
         },
         {
           "id": "no_hls_use_mpegts",
@@ -1056,7 +1139,8 @@
           "type": "bool",
           "help": "Do not use the mpegts container for HLS videos. This is default when not downloading live streams",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "HLS için mpegts kullanmaz (canlı olmayan indirmede varsayılan)"
         },
         {
           "id": "download_sections",
@@ -1068,7 +1152,8 @@
           "type": "value",
           "help": "Download only chapters that match the regular expression. A \"*\" prefix denotes time-range instead of chapter. Negative timestamps are calculated from the end. \"*from-url\" can be used to download between the \"start_time\" and \"end_time\" extracted from the URL. Needs ffmpeg. This option can be used multiple times to download multiple sections, e.g. --download-sections \"*10:15-inf\" --download-sections \"intro\"",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Düzenli ifadeyle eşleşen bölümleri indirir. \"*\" öneki zaman aralığıdır. ffmpeg gerekir. Birden çok kez kullanılabilir"
         },
         {
           "id": "downloader",
@@ -1080,7 +1165,8 @@
           "type": "value",
           "help": "Name or path of the external downloader to use (optionally) prefixed by the protocols (http, ftp, m3u8, dash, rtmp) to use it for. Currently supports native, aria2c, axel, curl, ffmpeg, httpie, wget. You can use this option multiple times to set different downloaders for different protocols. E.g. --downloader aria2c --downloader \"dash,m3u8:native\" will use aria2c for http/ftp downloads, and the native downloader for dash/m3u8 downloads (Alias: --external-downloader)",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Harici indirici adı/yolu (isteğe bağlı protokol öneki). native, aria2c, axel, curl, ffmpeg, httpie, wget. Birden çok kez kullanılabilir"
         },
         {
           "id": "downloader_args",
@@ -1092,7 +1178,8 @@
           "type": "value",
           "help": "Give these arguments to the external downloader. Specify the downloader name and the arguments separated by a colon \":\". For ffmpeg, arguments can be passed to different positions using the same syntax as --postprocessor-args. You can use this option multiple times to give different arguments to different downloaders (Alias: --external-downloader-args)",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Harici indiriciye argümanlar: indirici:argümanlar. Birden çok kez kullanılabilir"
         }
       ]
     },
@@ -1112,7 +1199,8 @@
           "type": "value",
           "help": "File containing URLs to download (\"-\" for stdin), one URL per line. Lines starting with \"#\", \";\" or \"]\" are considered as comments and ignored",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İndirilecek URL'leri içeren dosya (satır başına bir; \"-\" = stdin). # ; ] ile başlayanlar yorum"
         },
         {
           "id": "no_batch_file",
@@ -1124,7 +1212,8 @@
           "type": "bool",
           "help": "Do not read URLs from batch file (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Toplu URL dosyası okumaz (varsayılan)"
         },
         {
           "id": "paths",
@@ -1137,7 +1226,8 @@
           "type": "value",
           "help": "The paths where the files should be downloaded. Specify the type of file and the path separated by a colon \":\". All the same TYPES as --output are supported. Additionally, you can also provide \"home\" (default) and \"temp\" paths. All intermediary files are first downloaded to the temp path and then the final files are moved over to the home path after download is finished. This option is ignored if --output is an absolute path",
           "multiple": false,
-          "main_panel": true
+          "main_panel": true,
+          "help_tr": "Dosya türü:yol ile indirme yolları. home ve temp desteklenir. Mutlak --output varsa yok sayılır"
         },
         {
           "id": "output",
@@ -1150,7 +1240,8 @@
           "type": "value",
           "help": "Output filename template; see \"OUTPUT TEMPLATE\" for details",
           "multiple": false,
-          "main_panel": true
+          "main_panel": true,
+          "help_tr": "Çıktı dosya adı şablonu (OUTPUT TEMPLATE)"
         },
         {
           "id": "output_na_placeholder",
@@ -1162,7 +1253,8 @@
           "type": "value",
           "help": "Placeholder for unavailable fields in --output (default: \"NA\")",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "--output'ta eksik alanlar için yer tutucu (varsayılan: NA)"
         },
         {
           "id": "restrict_filenames",
@@ -1174,7 +1266,8 @@
           "type": "bool",
           "help": "Restrict filenames to only ASCII characters, and avoid \"&\" and spaces in filenames",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dosya adlarını yalnızca ASCII yapar; & ve boşluktan kaçınır"
         },
         {
           "id": "no_restrict_filenames",
@@ -1186,7 +1279,8 @@
           "type": "bool",
           "help": "Allow Unicode characters, \"&\" and spaces in filenames (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Unicode, & ve boşluğa izin verir (varsayılan)"
         },
         {
           "id": "windows_filenames",
@@ -1198,7 +1292,8 @@
           "type": "bool",
           "help": "Force filenames to be Windows-compatible",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dosya adlarını Windows uyumlu zorunlu kılar"
         },
         {
           "id": "no_windows_filenames",
@@ -1210,7 +1305,8 @@
           "type": "bool",
           "help": "Sanitize filenames only minimally",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dosya adlarını yalnızca minimal temizler"
         },
         {
           "id": "trim_filenames",
@@ -1222,7 +1318,8 @@
           "type": "value",
           "help": "Limit the filename length (excluding extension) to the specified number of characters",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Uzantı hariç dosya adı uzunluğunu karakter sayısıyla sınırlar"
         },
         {
           "id": "no_overwrites",
@@ -1235,7 +1332,8 @@
           "type": "bool",
           "help": "Do not overwrite any files",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Hiçbir dosyanın üzerine yazmaz"
         },
         {
           "id": "force_overwrites",
@@ -1247,7 +1345,8 @@
           "type": "bool",
           "help": "Overwrite all video and metadata files. This option includes --no-continue",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tüm video ve meta dosyaların üzerine yazar (--no-continue dahil)"
         },
         {
           "id": "no_force_overwrites",
@@ -1259,7 +1358,8 @@
           "type": "bool",
           "help": "Do not overwrite the video, but overwrite related files (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Videonun üzerine yazmaz ama ilgili dosyaların üzerine yazar (varsayılan)"
         },
         {
           "id": "continue",
@@ -1272,7 +1372,8 @@
           "type": "bool",
           "help": "Resume partially downloaded files/fragments (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Kısmen indirilmiş dosya/parçalara devam eder (varsayılan)"
         },
         {
           "id": "no_continue",
@@ -1284,7 +1385,8 @@
           "type": "bool",
           "help": "Do not resume partially downloaded fragments. If the file is not fragmented, restart download of the entire file",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Kısmi parçalara devam etmez; parçalı değilse baştan indirir"
         },
         {
           "id": "part",
@@ -1296,7 +1398,8 @@
           "type": "bool",
           "help": "Use .part files instead of writing directly into output file (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Doğrudan yazmak yerine .part dosyası kullanır (varsayılan)"
         },
         {
           "id": "no_part",
@@ -1308,7 +1411,8 @@
           "type": "bool",
           "help": "Do not use .part files - write directly into output file",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": ".part kullanmaz; doğrudan çıktı dosyasına yazar"
         },
         {
           "id": "mtime",
@@ -1320,7 +1424,8 @@
           "type": "bool",
           "help": "Use the Last-modified header to set the file modification time",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Last-modified başlığıyla dosya değiştirme zamanını ayarlar"
         },
         {
           "id": "no_mtime",
@@ -1332,7 +1437,8 @@
           "type": "bool",
           "help": "Do not use the Last-modified header to set the file modification time (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Last-modified ile zaman ayarlamaz (varsayılan)"
         },
         {
           "id": "write_description",
@@ -1344,7 +1450,8 @@
           "type": "bool",
           "help": "Write video description to a .description file",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Video açıklamasını .description dosyasına yazar"
         },
         {
           "id": "no_write_description",
@@ -1356,7 +1463,8 @@
           "type": "bool",
           "help": "Do not write video description (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Video açıklaması yazmaz (varsayılan)"
         },
         {
           "id": "write_info_json",
@@ -1368,7 +1476,8 @@
           "type": "bool",
           "help": "Write video metadata to a .info.json file (this may contain personal information)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Video meta verisini .info.json dosyasına yazar (kişisel bilgi içerebilir)"
         },
         {
           "id": "no_write_info_json",
@@ -1380,7 +1489,8 @@
           "type": "bool",
           "help": "Do not write video metadata (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Video meta verisi yazmaz (varsayılan)"
         },
         {
           "id": "write_playlist_metafiles",
@@ -1392,7 +1502,8 @@
           "type": "bool",
           "help": "Write playlist metadata in addition to the video metadata when using --write-info-json, --write-description etc. (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "--write-info-json vb. ile oynatma listesi meta verisini de yazar (varsayılan)"
         },
         {
           "id": "no_write_playlist_metafiles",
@@ -1404,7 +1515,8 @@
           "type": "bool",
           "help": "Do not write playlist metadata when using --write-info-json, --write-description etc.",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Oynatma listesi meta verisini yazmaz"
         },
         {
           "id": "clean_info_json",
@@ -1416,7 +1528,8 @@
           "type": "bool",
           "help": "Remove some internal metadata such as filenames from the infojson (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "infojson'dan dosya adı gibi iç meta verileri çıkarır (varsayılan)"
         },
         {
           "id": "no_clean_info_json",
@@ -1428,7 +1541,8 @@
           "type": "bool",
           "help": "Write all fields to the infojson",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "infojson'a tüm alanları yazar"
         },
         {
           "id": "write_comments",
@@ -1440,7 +1554,8 @@
           "type": "bool",
           "help": "Retrieve video comments to be placed in the infojson. The comments are fetched even without this option if the extraction is known to be quick (Alias: --get-comments)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Video yorumlarını infojson'a almak için çeker (Takma ad: --get-comments)"
         },
         {
           "id": "no_write_comments",
@@ -1452,7 +1567,8 @@
           "type": "bool",
           "help": "Do not retrieve video comments unless the extraction is known to be quick (Alias: --no-get-comments)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Hızlı olmadığı sürece yorum çekmez (Takma ad: --no-get-comments)"
         },
         {
           "id": "load_info_json",
@@ -1464,7 +1580,8 @@
           "type": "value",
           "help": "JSON file containing the video information (created with the \"--write-info-json\" option)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Video bilgisini içeren JSON dosyası (--write-info-json ile oluşturulmuş)"
         },
         {
           "id": "cookies",
@@ -1476,7 +1593,8 @@
           "type": "value",
           "help": "Netscape formatted file to read cookies from and dump cookie jar in",
           "multiple": false,
-          "main_panel": true
+          "main_panel": true,
+          "help_tr": "Netscape biçimli çerez dosyası (okuma ve yazma)"
         },
         {
           "id": "no_cookies",
@@ -1488,7 +1606,8 @@
           "type": "bool",
           "help": "Do not read/dump cookies from/to file (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Çerez dosyası okumaz/yazmaz (varsayılan)"
         },
         {
           "id": "cookies_from_browser",
@@ -1500,7 +1619,8 @@
           "type": "value",
           "help": "The name of the browser to load cookies from. Currently supported browsers are: brave, chrome, chromium, edge, firefox, opera, safari, vivaldi, whale. Optionally, the KEYRING used for decrypting Chromium cookies on Linux, the name/path of the PROFILE to load cookies from, and the CONTAINER name (if Firefox) (\"none\" for no container) can be given with their respective separators. By default, all containers of the most recently accessed profile are used. Currently supported keyrings are: basictext, gnomekeyring, kwallet, kwallet5, kwallet6",
           "multiple": false,
-          "main_panel": true
+          "main_panel": true,
+          "help_tr": "Çerezlerin alınacağı tarayıcı (brave, chrome, edge, firefox vb.). İsteğe bağlı profil/anahtarlık/kapsayıcı"
         },
         {
           "id": "no_cookies_from_browser",
@@ -1512,7 +1632,8 @@
           "type": "bool",
           "help": "Do not load cookies from browser (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tarayıcıdan çerez yüklemez (varsayılan)"
         },
         {
           "id": "cache_dir",
@@ -1524,7 +1645,8 @@
           "type": "value",
           "help": "Location in the filesystem where yt-dlp can store some downloaded information (such as client ids and signatures) permanently. By default ${XDG_CACHE_HOME}/yt-dlp",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "yt-dlp'nin kalıcı önbellek klasörü (varsayılan: ${XDG_CACHE_HOME}/yt-dlp)"
         },
         {
           "id": "no_cache_dir",
@@ -1536,7 +1658,8 @@
           "type": "bool",
           "help": "Disable filesystem caching",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dosya sistemi önbelleğini kapatır"
         },
         {
           "id": "rm_cache_dir",
@@ -1548,7 +1671,8 @@
           "type": "bool",
           "help": "Delete all filesystem cache files",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tüm dosya sistemi önbellek dosyalarını siler"
         }
       ]
     },
@@ -1567,7 +1691,8 @@
           "type": "bool",
           "help": "Write thumbnail image to disk",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Küçük resmi diske yazar"
         },
         {
           "id": "no_write_thumbnail",
@@ -1579,7 +1704,8 @@
           "type": "bool",
           "help": "Do not write thumbnail image to disk (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Küçük resmi yazmaz (varsayılan)"
         },
         {
           "id": "write_all_thumbnails",
@@ -1591,7 +1717,8 @@
           "type": "bool",
           "help": "Write all thumbnail image formats to disk",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tüm küçük resim biçimlerini diske yazar"
         },
         {
           "id": "list_thumbnails",
@@ -1603,7 +1730,8 @@
           "type": "bool",
           "help": "List available thumbnails of each video. Simulate unless --no-simulate is used",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Her videonun kullanılabilir küçük resimlerini listeler (simülasyon)"
         }
       ]
     },
@@ -1622,7 +1750,8 @@
           "type": "bool",
           "help": "Write an internet shortcut file, depending on the current platform (.url, .webloc or .desktop). The URL may be cached by the OS",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Platforma göre internet kısayolu yazar (.url / .webloc / .desktop)"
         },
         {
           "id": "write_url_link",
@@ -1634,7 +1763,8 @@
           "type": "bool",
           "help": "Write a .url Windows internet shortcut. The OS caches the URL based on the file path",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Windows .url internet kısayolu yazar"
         },
         {
           "id": "write_webloc_link",
@@ -1646,7 +1776,8 @@
           "type": "bool",
           "help": "Write a .webloc macOS internet shortcut",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "macOS .webloc internet kısayolu yazar"
         },
         {
           "id": "write_desktop_link",
@@ -1658,7 +1789,8 @@
           "type": "bool",
           "help": "Write a .desktop Linux internet shortcut",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Linux .desktop internet kısayolu yazar"
         }
       ]
     },
@@ -1678,7 +1810,8 @@
           "type": "bool",
           "help": "Activate quiet mode. If used with --verbose, print the log to stderr",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Sessiz kip. --verbose ile birlikte log stderr'e gider"
         },
         {
           "id": "no_quiet",
@@ -1690,7 +1823,8 @@
           "type": "bool",
           "help": "Deactivate quiet mode. (Default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Sessiz kipi kapatır (varsayılan)"
         },
         {
           "id": "no_warnings",
@@ -1702,7 +1836,8 @@
           "type": "bool",
           "help": "Ignore warnings",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Uyarıları yok sayar"
         },
         {
           "id": "simulate",
@@ -1715,7 +1850,8 @@
           "type": "bool",
           "help": "Do not download the video and do not write anything to disk",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Videoyu indirmez ve diske bir şey yazmaz"
         },
         {
           "id": "no_simulate",
@@ -1727,7 +1863,8 @@
           "type": "bool",
           "help": "Download the video even if printing/listing options are used",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Listeleme seçenekleri olsa bile videoyu indirir"
         },
         {
           "id": "ignore_no_formats_error",
@@ -1739,7 +1876,8 @@
           "type": "bool",
           "help": "Ignore \"No video formats\" error. Useful for extracting metadata even if the videos are not actually available for download (experimental)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "\"Biçim yok\" hatasını yok sayar; meta veri çıkarmak için yararlı (deneysel)"
         },
         {
           "id": "no_ignore_no_formats_error",
@@ -1751,7 +1889,8 @@
           "type": "bool",
           "help": "Throw error when no downloadable video formats are found (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İndirilebilir biçim yoksa hata verir (varsayılan)"
         },
         {
           "id": "skip_download",
@@ -1763,7 +1902,8 @@
           "type": "bool",
           "help": "Do not download the video but write all related files (Alias: --no-download)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Videoyu indirmez ama ilgili dosyaları yazar (Takma ad: --no-download)"
         },
         {
           "id": "print",
@@ -1776,7 +1916,8 @@
           "type": "value",
           "help": "Field name or output template to print to screen, optionally prefixed with when to print it, separated by a \":\". Supported values of \"WHEN\" are the same as that of --use-postprocessor (default: video). Implies --quiet. Implies --simulate unless --no-simulate or later stages of WHEN are used. This option can be used multiple times",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Ekrana yazılacak alan veya şablon; isteğe bağlı WHEN: öneki. --quiet ima eder. Birden çok kez kullanılabilir"
         },
         {
           "id": "print_to_file",
@@ -1788,7 +1929,8 @@
           "type": "value",
           "help": "Append given template to the file. The values of WHEN and TEMPLATE are the same as that of --print. FILE uses the same syntax as the output template. This option can be used multiple times",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Verilen şablonu dosyaya ekler. WHEN ve TEMPLATE --print ile aynı. Birden çok kez kullanılabilir"
         },
         {
           "id": "dump_json",
@@ -1801,7 +1943,8 @@
           "type": "bool",
           "help": "Quiet, but print JSON information for each video. Simulate unless --no-simulate is used. See \"OUTPUT TEMPLATE\" for a description of available keys",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Her video için JSON yazar (sessiz). Simülasyon yapar (--no-simulate yoksa)"
         },
         {
           "id": "dump_single_json",
@@ -1814,7 +1957,8 @@
           "type": "bool",
           "help": "Quiet, but print JSON information for each URL or infojson passed. Simulate unless --no-simulate is used. If the URL refers to a playlist, the whole playlist information is dumped in a single line",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Her URL/infojson için JSON yazar. Oynatma listesinde tüm bilgi tek satırda"
         },
         {
           "id": "force_write_archive",
@@ -1826,7 +1970,8 @@
           "type": "bool",
           "help": "Force download archive entries to be written as far as no errors occur, even if -s or another simulation option is used (Alias: --force-download-archive)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Simülasyon olsa bile hata yoksa arşiv girdilerini yazar"
         },
         {
           "id": "newline",
@@ -1838,7 +1983,8 @@
           "type": "bool",
           "help": "Output progress bar as new lines",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İlerleme çubuğunu satır satır yazar"
         },
         {
           "id": "no_progress",
@@ -1850,7 +1996,8 @@
           "type": "bool",
           "help": "Do not print progress bar",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İlerleme çubuğu yazdırmaz"
         },
         {
           "id": "progress",
@@ -1862,7 +2009,8 @@
           "type": "bool",
           "help": "Show progress bar, even if in quiet mode",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Sessiz kipte bile ilerleme çubuğu gösterir"
         },
         {
           "id": "console_title",
@@ -1874,7 +2022,8 @@
           "type": "bool",
           "help": "Display progress in console titlebar",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İlerlemeyi konsol başlığında gösterir"
         },
         {
           "id": "progress_template",
@@ -1886,7 +2035,8 @@
           "type": "value",
           "help": "Template for progress outputs, optionally prefixed with one of \"download:\" (default), \"download-title:\" (the console title), \"postprocess:\",  or \"postprocess-title:\". The video's fields are accessible under the \"info\" key and the progress attributes are accessible under \"progress\" key. E.g. --console-title --progress-template \"download- title:%(info.id)s-%(progress.eta)s\"",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İlerleme çıktısı şablonu; download:, download-title:, postprocess: önekleri. info ve progress anahtarları"
         },
         {
           "id": "progress_delta",
@@ -1898,7 +2048,8 @@
           "type": "value",
           "help": "Time between progress output (default: 0)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İlerleme çıktıları arasındaki süre (varsayılan: 0)"
         },
         {
           "id": "verbose",
@@ -1911,7 +2062,8 @@
           "type": "bool",
           "help": "Print various debugging information",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Çeşitli hata ayıklama bilgilerini yazdırır"
         },
         {
           "id": "dump_pages",
@@ -1923,7 +2075,8 @@
           "type": "bool",
           "help": "Print downloaded pages encoded using base64 to debug problems (very verbose)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İndirilen sayfaları base64 ile yazdırır (çok ayrıntılı)"
         },
         {
           "id": "write_pages",
@@ -1935,7 +2088,8 @@
           "type": "bool",
           "help": "Write downloaded intermediary pages to files in the current directory to debug problems",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Ara sayfaları geçerli klasöre dosya olarak yazar"
         },
         {
           "id": "print_traffic",
@@ -1947,7 +2101,8 @@
           "type": "bool",
           "help": "Display sent and read HTTP traffic",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Gönderilen ve okunan HTTP trafiğini gösterir"
         }
       ]
     },
@@ -1966,7 +2121,8 @@
           "type": "value",
           "help": "Force the specified encoding (experimental)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Belirtilen kodlamayı zorlar (deneysel)"
         },
         {
           "id": "legacy_server_connect",
@@ -1978,7 +2134,8 @@
           "type": "bool",
           "help": "Explicitly allow HTTPS connection to servers that do not support RFC 5746 secure renegotiation",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "RFC 5746 güvenli yeniden anlaşmayı desteklemeyen HTTPS sunucularına izin verir"
         },
         {
           "id": "no_check_certificates",
@@ -1990,7 +2147,8 @@
           "type": "bool",
           "help": "Suppress HTTPS certificate validation",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "HTTPS sertifika doğrulamasını kapatır"
         },
         {
           "id": "prefer_insecure",
@@ -2002,7 +2160,8 @@
           "type": "bool",
           "help": "Use an unencrypted connection to retrieve information about the video",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Video bilgisi için şifresiz bağlantı kullanır"
         },
         {
           "id": "add_headers",
@@ -2014,7 +2173,8 @@
           "type": "value",
           "help": "Specify a custom HTTP header and its value, separated by a colon \":\". You can use this option multiple times",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Özel HTTP başlığı:değer ekler. Birden çok kez kullanılabilir"
         },
         {
           "id": "bidi_workaround",
@@ -2026,7 +2186,8 @@
           "type": "bool",
           "help": "Work around terminals that lack bidirectional text support. Requires bidiv or fribidi executable in PATH",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Çift yönlü metin desteği zayıf terminaller için çözüm (bidiv/fribidi gerekir)"
         },
         {
           "id": "sleep_requests",
@@ -2038,7 +2199,8 @@
           "type": "value",
           "help": "Number of seconds to sleep between requests during data extraction",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Veri çıkarımı sırasında istekler arası bekleme (saniye)"
         },
         {
           "id": "sleep_interval",
@@ -2050,7 +2212,8 @@
           "type": "value",
           "help": "Number of seconds to sleep before each download. This is the minimum time to sleep when used along with --max-sleep-interval (Alias: --min-sleep-interval)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Her indirmeden önce bekleme (sn). --max-sleep-interval ile birlikte minimumdur"
         },
         {
           "id": "max_sleep_interval",
@@ -2062,7 +2225,8 @@
           "type": "value",
           "help": "Maximum number of seconds to sleep. Can only be used along with --min-sleep-interval",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "En fazla bekleme süresi (sn). Yalnızca --min-sleep-interval ile"
         },
         {
           "id": "sleep_subtitles",
@@ -2074,7 +2238,8 @@
           "type": "value",
           "help": "Number of seconds to sleep before each subtitle download",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Her altyazı indirmeden önce bekleme (saniye)"
         }
       ]
     },
@@ -2094,7 +2259,8 @@
           "type": "value",
           "help": "Video format code, see \"FORMAT SELECTION\" for more details",
           "multiple": false,
-          "main_panel": true
+          "main_panel": true,
+          "help_tr": "Video biçim kodu (FORMAT SELECTION)"
         },
         {
           "id": "format_sort",
@@ -2107,7 +2273,8 @@
           "type": "value",
           "help": "Sort the formats by the fields given, see \"Sorting Formats\" for more details",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Biçimleri verilen alanlara göre sıralar (Sorting Formats)"
         },
         {
           "id": "format_sort_reset",
@@ -2119,7 +2286,8 @@
           "type": "bool",
           "help": "Disregard previous user specified sort order and reset to the default",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Önceki kullanıcı sıralamasını yok sayıp varsayılana döner"
         },
         {
           "id": "format_sort_force",
@@ -2131,7 +2299,8 @@
           "type": "bool",
           "help": "Force user specified sort order to have precedence over all fields, see \"Sorting Formats\" for more details (Alias: --S-force)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Kullanıcı sıralamasını tüm alanlara üstün kılar (Takma ad: --S-force)"
         },
         {
           "id": "no_format_sort_force",
@@ -2143,7 +2312,8 @@
           "type": "bool",
           "help": "Some fields have precedence over the user specified sort order (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bazı alanlar kullanıcı sıralamasından önce gelir (varsayılan)"
         },
         {
           "id": "video_multistreams",
@@ -2155,7 +2325,8 @@
           "type": "bool",
           "help": "Allow multiple video streams to be merged into a single file",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Birden çok video akışının tek dosyada birleştirilmesine izin verir"
         },
         {
           "id": "no_video_multistreams",
@@ -2167,7 +2338,8 @@
           "type": "bool",
           "help": "Only one video stream is downloaded for each output file (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Her çıktı için yalnızca bir video akışı indirir (varsayılan)"
         },
         {
           "id": "audio_multistreams",
@@ -2179,7 +2351,8 @@
           "type": "bool",
           "help": "Allow multiple audio streams to be merged into a single file",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Birden çok ses akışının tek dosyada birleştirilmesine izin verir"
         },
         {
           "id": "no_audio_multistreams",
@@ -2191,7 +2364,8 @@
           "type": "bool",
           "help": "Only one audio stream is downloaded for each output file (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Her çıktı için yalnızca bir ses akışı indirir (varsayılan)"
         },
         {
           "id": "prefer_free_formats",
@@ -2203,7 +2377,8 @@
           "type": "bool",
           "help": "Prefer video formats with free containers over non-free ones of the same quality. Use with \"-S ext\" to strictly prefer free containers irrespective of quality",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Aynı kalitede ücretsiz kapları tercih eder. \"-S ext\" ile kaliteden bağımsız sıkı tercih"
         },
         {
           "id": "no_prefer_free_formats",
@@ -2215,7 +2390,8 @@
           "type": "bool",
           "help": "Don't give any special preference to free containers (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Ücretsiz kaplara özel tercih vermez (varsayılan)"
         },
         {
           "id": "check_formats",
@@ -2227,7 +2403,8 @@
           "type": "bool",
           "help": "Make sure formats are selected only from those that are actually downloadable",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Yalnızca gerçekten indirilebilir biçimleri seçer"
         },
         {
           "id": "check_all_formats",
@@ -2239,7 +2416,8 @@
           "type": "bool",
           "help": "Check all formats for whether they are actually downloadable",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Tüm biçimlerin indirilebilirliğini denetler"
         },
         {
           "id": "no_check_formats",
@@ -2251,7 +2429,8 @@
           "type": "bool",
           "help": "Do not check that the formats are actually downloadable",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Biçimlerin indirilebilirliğini denetlemez"
         },
         {
           "id": "list_formats",
@@ -2264,7 +2443,8 @@
           "type": "bool",
           "help": "List available formats of each video. Simulate unless --no-simulate is used",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Her videonun biçimlerini listeler (simülasyon)"
         },
         {
           "id": "merge_output_format",
@@ -2276,7 +2456,8 @@
           "type": "value",
           "help": "Containers that may be used when merging formats, separated by \"/\", e.g. \"mp4/mkv\". Ignored if no merge is required. (currently supported: avi, flv, mkv, mov, mp4, webm)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Birleştirmede kullanılabilecek kaplar, \"/\" ile ayrılır (örn. mp4/mkv)"
         }
       ]
     },
@@ -2295,7 +2476,8 @@
           "type": "bool",
           "help": "Write subtitle file",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Altyazı dosyası yazar"
         },
         {
           "id": "no_write_subs",
@@ -2307,7 +2489,8 @@
           "type": "bool",
           "help": "Do not write subtitle file (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Altyazı dosyası yazmaz (varsayılan)"
         },
         {
           "id": "write_auto_subs",
@@ -2319,7 +2502,8 @@
           "type": "bool",
           "help": "Write automatically generated subtitle file (Alias: --write-automatic-subs)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Otomatik oluşturulmuş altyazı yazar (Takma ad: --write-automatic-subs)"
         },
         {
           "id": "no_write_auto_subs",
@@ -2331,7 +2515,8 @@
           "type": "bool",
           "help": "Do not write auto-generated subtitles (default) (Alias: --no-write-automatic-subs)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Otomatik altyazı yazmaz (varsayılan)"
         },
         {
           "id": "list_subs",
@@ -2343,7 +2528,8 @@
           "type": "bool",
           "help": "List available subtitles of each video. Simulate unless --no-simulate is used",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Her videonun altyazılarını listeler (simülasyon)"
         },
         {
           "id": "sub_format",
@@ -2355,7 +2541,8 @@
           "type": "value",
           "help": "Subtitle format; accepts formats preference separated by \"/\", e.g. \"srt\" or \"ass/srt/best\"",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Altyazı biçimi; \"/\" ile tercih sırası (örn. srt veya ass/srt/best)"
         },
         {
           "id": "sub_langs",
@@ -2367,7 +2554,8 @@
           "type": "value",
           "help": "Languages of the subtitles to download (can be regex) or \"all\" separated by commas, e.g. --sub-langs \"en.*,ja\" (where \"en.*\" is a regex pattern that matches \"en\" followed by 0 or more of any character). You can prefix the language code with a \"-\" to exclude it from the requested languages, e.g. --sub- langs all,-live_chat. Use --list-subs for a list of available language tags",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İndirilecek altyazı dilleri (regex veya all), virgülle. \"-\" önekiyle hariç tutma. --list-subs ile etiketleri görün"
         }
       ]
     },
@@ -2387,7 +2575,8 @@
           "type": "value",
           "help": "Login with this account ID",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bu hesap kimliğiyle oturum açar"
         },
         {
           "id": "password",
@@ -2400,7 +2589,8 @@
           "type": "value",
           "help": "Account password. If this option is left out, yt-dlp will ask interactively",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Hesap parolası. Verilmezse etkileşimli sorulur"
         },
         {
           "id": "twofactor",
@@ -2413,7 +2603,8 @@
           "type": "value",
           "help": "Two-factor authentication code",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İki adımlı doğrulama kodu"
         },
         {
           "id": "netrc",
@@ -2426,7 +2617,8 @@
           "type": "bool",
           "help": "Use .netrc authentication data",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": ".netrc kimlik doğrulama verisini kullanır"
         },
         {
           "id": "netrc_location",
@@ -2438,7 +2630,8 @@
           "type": "value",
           "help": "Location of .netrc authentication data; either the path or its containing directory. Defaults to ~/.netrc",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": ".netrc konumu (dosya veya klasör). Varsayılan ~/.netrc"
         },
         {
           "id": "netrc_cmd",
@@ -2450,7 +2643,8 @@
           "type": "value",
           "help": "Command to execute to get the credentials for an extractor.",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Çıkarıcı için kimlik bilgisi almak üzere çalıştırılacak komut"
         },
         {
           "id": "video_password",
@@ -2462,7 +2656,8 @@
           "type": "value",
           "help": "Video-specific password",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Videoya özel parola"
         },
         {
           "id": "ap_mso",
@@ -2474,7 +2669,8 @@
           "type": "value",
           "help": "Adobe Pass multiple-system operator (TV provider) identifier, use --ap-list-mso for a list of available MSOs",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Adobe Pass TV sağlayıcı (MSO) kimliği; --ap-list-mso ile liste"
         },
         {
           "id": "ap_username",
@@ -2486,7 +2682,8 @@
           "type": "value",
           "help": "Multiple-system operator account login",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "MSO hesap kullanıcı adı"
         },
         {
           "id": "ap_password",
@@ -2498,7 +2695,8 @@
           "type": "value",
           "help": "Multiple-system operator account password. If this option is left out, yt-dlp will ask interactively",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "MSO hesap parolası. Verilmezse etkileşimli sorulur"
         },
         {
           "id": "ap_list_mso",
@@ -2510,7 +2708,8 @@
           "type": "bool",
           "help": "List all supported multiple-system operators",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Desteklenen tüm MSO'ları listeler"
         },
         {
           "id": "client_certificate",
@@ -2522,7 +2721,8 @@
           "type": "value",
           "help": "Path to client certificate file in PEM format. May include the private key",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "PEM biçimli istemci sertifikası yolu (özel anahtar dahil olabilir)"
         },
         {
           "id": "client_certificate_key",
@@ -2534,7 +2734,8 @@
           "type": "value",
           "help": "Path to private key file for client certificate",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İstemci sertifikası özel anahtar dosyası yolu"
         },
         {
           "id": "client_certificate_password",
@@ -2546,7 +2747,8 @@
           "type": "value",
           "help": "Password for client certificate private key, if encrypted. If not provided, and the key is encrypted, yt-dlp will ask interactively",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Şifreli özel anahtar parolası. Yoksa etkileşimli sorulur"
         }
       ]
     },
@@ -2566,7 +2768,8 @@
           "type": "bool",
           "help": "Convert video files to audio-only files (requires ffmpeg and ffprobe)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Video dosyalarını yalnızca sese dönüştürür (ffmpeg ve ffprobe gerekir)"
         },
         {
           "id": "audio_format",
@@ -2578,7 +2781,8 @@
           "type": "value",
           "help": "Format to convert the audio to when -x is used. (currently supported: best (default), aac, alac, flac, m4a, mp3, opus, vorbis, wav). You can specify multiple rules using similar syntax as --remux-video",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "-x ile ses dönüşüm biçimi: best (varsayılan), aac, alac, flac, m4a, mp3, opus, vorbis, wav"
         },
         {
           "id": "audio_quality",
@@ -2590,7 +2794,8 @@
           "type": "value",
           "help": "Specify ffmpeg audio quality to use when converting the audio with -x. Insert a value between 0 (best) and 10 (worst) for VBR or a specific bitrate like 128K (default 5)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "-x ile ffmpeg ses kalitesi: 0 (en iyi)–10 (en kötü) VBR veya 128K gibi bit hızı (varsayılan 5)"
         },
         {
           "id": "remux_video",
@@ -2602,7 +2807,8 @@
           "type": "value",
           "help": "Remux the video into another container if necessary (currently supported: avi, flv, gif, mkv, mov, mp4, webm, aac, aiff, alac, flac, m4a, mka, mp3, ogg, opus, vorbis, wav). If the target container does not support the video/audio codec, remuxing will fail. You can specify multiple rules; e.g. \"aac>m4a/mov>mp4/mkv\" will remux aac to m4a, mov to mp4 and anything else to mkv",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Gerekirse videoyu başka kaba yeniden mux'lar (mp4, mkv, webm vb.). Birden çok kural: aac>m4a/mov>mp4/mkv"
         },
         {
           "id": "recode_video",
@@ -2614,7 +2820,8 @@
           "type": "value",
           "help": "Re-encode the video into another format if necessary. The syntax and supported formats are the same as --remux-video",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Gerekirse videoyu yeniden kodlar (--remux-video ile aynı sözdizimi)"
         },
         {
           "id": "postprocessor_args",
@@ -2626,7 +2833,8 @@
           "type": "value",
           "help": "Give these arguments to the postprocessors. Specify the postprocessor/executable name and the arguments separated by a colon \":\" to give the argument to the specified postprocessor/executable. Supported PP are: Merger, ModifyChapters, SplitChapters, ExtractAudio, VideoRemuxer, VideoConvertor, Metadata, EmbedSubtitle, EmbedThumbnail, SubtitlesConvertor, ThumbnailsConvertor, FixupStretched, FixupM4a, FixupM3u8, FixupTimestamp and FixupDuration. The supported executables are: AtomicParsley, FFmpeg and FFprobe. You can also specify \"PP+EXE:ARGS\" to give the arguments to the specified executable only when being used by the specified postprocessor. Additionally, for ffmpeg/ffprobe, \"_i\"/\"_o\" can be appended to the prefix optionally followed by a number to pass the argument before the specified input/output file, e.g. --ppa \"Merger+ffmpeg_i1:-v quiet\". You can use this option multiple times to give different arguments to different postprocessors. (Alias: --ppa)",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Son işleyicilere argüman: ad:argümanlar. Merger, ExtractAudio, Metadata vb. (Takma ad: --ppa)"
         },
         {
           "id": "keep_video",
@@ -2639,7 +2847,8 @@
           "type": "bool",
           "help": "Keep the intermediate video file on disk after post-processing",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Son işlemeden sonra ara video dosyasını diskte tutar"
         },
         {
           "id": "no_keep_video",
@@ -2651,7 +2860,8 @@
           "type": "bool",
           "help": "Delete the intermediate video file after post-processing (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Son işlemeden sonra ara videoyu siler (varsayılan)"
         },
         {
           "id": "post_overwrites",
@@ -2663,7 +2873,8 @@
           "type": "bool",
           "help": "Overwrite post-processed files (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Son işlenmiş dosyaların üzerine yazar (varsayılan)"
         },
         {
           "id": "no_post_overwrites",
@@ -2675,7 +2886,8 @@
           "type": "bool",
           "help": "Do not overwrite post-processed files",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Son işlenmiş dosyaların üzerine yazmaz"
         },
         {
           "id": "embed_subs",
@@ -2687,7 +2899,8 @@
           "type": "bool",
           "help": "Embed subtitles in the video (only for mp4, webm and mkv videos)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Altyazıları videoya gömer (mp4, webm, mkv)"
         },
         {
           "id": "no_embed_subs",
@@ -2699,7 +2912,8 @@
           "type": "bool",
           "help": "Do not embed subtitles (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Altyazı gömmez (varsayılan)"
         },
         {
           "id": "embed_thumbnail",
@@ -2711,7 +2925,8 @@
           "type": "bool",
           "help": "Embed thumbnail in the video as cover art",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Küçük resmi kapak olarak videoya gömer"
         },
         {
           "id": "no_embed_thumbnail",
@@ -2723,7 +2938,8 @@
           "type": "bool",
           "help": "Do not embed thumbnail (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Küçük resim gömmez (varsayılan)"
         },
         {
           "id": "embed_metadata",
@@ -2735,7 +2951,8 @@
           "type": "bool",
           "help": "Embed metadata to the video file. Also embeds chapters/infojson if present unless --no-embed-chapters/--no-embed-info-json are used (Alias: --add-metadata)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Meta veriyi videoya gömer; bölüm/infojson de (Takma ad: --add-metadata)"
         },
         {
           "id": "no_embed_metadata",
@@ -2747,7 +2964,8 @@
           "type": "bool",
           "help": "Do not add metadata to file (default) (Alias: --no-add-metadata)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dosyaya meta veri eklemez (varsayılan)"
         },
         {
           "id": "embed_chapters",
@@ -2759,7 +2977,8 @@
           "type": "bool",
           "help": "Add chapter markers to the video file (Alias: --add-chapters)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Videoya bölüm işaretleri ekler (Takma ad: --add-chapters)"
         },
         {
           "id": "no_embed_chapters",
@@ -2771,7 +2990,8 @@
           "type": "bool",
           "help": "Do not add chapter markers (default) (Alias: --no-add-chapters)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bölüm işareti eklemez (varsayılan)"
         },
         {
           "id": "embed_info_json",
@@ -2783,7 +3003,8 @@
           "type": "bool",
           "help": "Embed the infojson as an attachment to mkv/mka video files",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "infojson'u mkv/mka dosyasına ek olarak gömer"
         },
         {
           "id": "no_embed_info_json",
@@ -2795,7 +3016,8 @@
           "type": "bool",
           "help": "Do not embed the infojson as an attachment to the video file",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "infojson ekini gömmez"
         },
         {
           "id": "parse_metadata",
@@ -2807,7 +3029,8 @@
           "type": "value",
           "help": "Parse additional metadata like title/artist from other fields; see \"MODIFYING METADATA\" for details. Supported values of \"WHEN\" are the same as that of --use-postprocessor (default: pre_process)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Başka alanlardan başlık/sanatçı gibi ek meta veri ayrıştırır (MODIFYING METADATA)"
         },
         {
           "id": "replace_in_metadata",
@@ -2819,7 +3042,8 @@
           "type": "value",
           "help": "Replace text in a metadata field using the given regex. This option can be used multiple times. Supported values of \"WHEN\" are the same as that of --use-postprocessor (default: pre_process)",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Meta veri alanında regex ile metin değiştirir. Birden çok kez kullanılabilir"
         },
         {
           "id": "xattrs",
@@ -2831,7 +3055,8 @@
           "type": "bool",
           "help": "Write metadata to the video file's xattrs (using Dublin Core and XDG standards)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Meta veriyi dosyanın xattr'larına yazar (Dublin Core / XDG)"
         },
         {
           "id": "concat_playlist",
@@ -2848,7 +3073,8 @@
             "never",
             "always",
             "multi_video"
-          ]
+          ],
+          "help_tr": "Oynatma listesi videolarını birleştirir: never, always veya multi_video (varsayılan). Aynı kodek gerekir"
         },
         {
           "id": "fixup",
@@ -2860,7 +3086,8 @@
           "type": "value",
           "help": "Automatically correct known faults of the file. One of never (do nothing), warn (only emit a warning), detect_or_warn (the default; fix the file if we can, warn otherwise), force (try fixing even if the file already exists)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bilinen dosya hatalarını düzeltir: never, warn, detect_or_warn (varsayılan), force"
         },
         {
           "id": "ffmpeg_location",
@@ -2872,7 +3099,8 @@
           "type": "value",
           "help": "Location of the ffmpeg binary; either the path to the binary or its containing directory",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "ffmpeg ikilisinin yolu veya içeren klasör"
         },
         {
           "id": "exec",
@@ -2884,7 +3112,8 @@
           "type": "value",
           "help": "Execute a command, optionally prefixed with when to execute it, separated by a \":\". Supported values of \"WHEN\" are the same as that of --use-postprocessor (default: after_move). The same syntax as the output template can be used to pass any field as arguments to the command; however, for security reasons the only allowed conversions are: \"i\"/\"d\" (signed integer decimal), \"f\" (floating-point decimal) and \"q\" (shell-quoted). If no fields are passed, %(filepath,_filename|)q is appended to the end of the command. This option can be used multiple times",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Komut çalıştırır; isteğe bağlı WHEN: öneki. Çıktı şablonu alanları güvenli dönüşümlerle. Birden çok kez kullanılabilir"
         },
         {
           "id": "no_exec",
@@ -2896,7 +3125,8 @@
           "type": "bool",
           "help": "Remove any previously defined --exec",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Önceden tanımlı --exec'leri kaldırır"
         },
         {
           "id": "convert_subs",
@@ -2908,7 +3138,8 @@
           "type": "value",
           "help": "Convert the subtitles to another format (currently supported: ass, lrc, srt, vtt). Use \"--convert-subs none\" to disable conversion (default) (Alias: --convert- subtitles)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Altyazıları başka biçime dönüştürür (ass, lrc, srt, vtt). \"none\" ile kapatılır"
         },
         {
           "id": "convert_thumbnails",
@@ -2920,7 +3151,8 @@
           "type": "value",
           "help": "Convert the thumbnails to another format (currently supported: jpg, png, webp). You can specify multiple rules using similar syntax as \"--remux-video\". Use \"--convert- thumbnails none\" to disable conversion (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Küçük resimleri başka biçime dönüştürür (jpg, png, webp). \"none\" ile kapatılır"
         },
         {
           "id": "split_chapters",
@@ -2932,7 +3164,8 @@
           "type": "bool",
           "help": "Split video into multiple files based on internal chapters. The \"chapter:\" prefix can be used with \"--paths\" and \"--output\" to set the output filename for the split files. See \"OUTPUT TEMPLATE\" for details",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İç bölümlere göre videoyu birden çok dosyaya böler. chapter: öneki çıktı adı için"
         },
         {
           "id": "no_split_chapters",
@@ -2944,7 +3177,8 @@
           "type": "bool",
           "help": "Do not split video based on chapters (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bölümlere göre bölmez (varsayılan)"
         },
         {
           "id": "remove_chapters",
@@ -2956,7 +3190,8 @@
           "type": "value",
           "help": "Remove chapters whose title matches the given regular expression. The syntax is the same as --download-sections. This option can be used multiple times",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Başlığı regex ile eşleşen bölümleri kaldırır (--download-sections sözdizimi). Birden çok kez"
         },
         {
           "id": "no_remove_chapters",
@@ -2968,7 +3203,8 @@
           "type": "bool",
           "help": "Do not remove any chapters from the file (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dosyadan bölüm kaldırmaz (varsayılan)"
         },
         {
           "id": "force_keyframes_at_cuts",
@@ -2980,7 +3216,8 @@
           "type": "bool",
           "help": "Force keyframes at cuts when downloading/splitting/removing sections. This is slow due to needing a re-encode, but the resulting video may have fewer artifacts around the cuts",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Kesitlerde anahtar kare zorlar (yavaş, yeniden kodlama; kesitlerde daha az bozulma)"
         },
         {
           "id": "no_force_keyframes_at_cuts",
@@ -2992,7 +3229,8 @@
           "type": "bool",
           "help": "Do not force keyframes around the chapters when cutting/splitting (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Kesmede anahtar kare zorlamaz (varsayılan)"
         },
         {
           "id": "use_postprocessor",
@@ -3004,7 +3242,8 @@
           "type": "value",
           "help": "The (case-sensitive) name of plugin postprocessors to be enabled, and (optionally) arguments to be passed to it, separated by a colon \":\". ARGS are a semicolon \";\" delimited list of NAME=VALUE. The \"when\" argument determines when the postprocessor is invoked. It can be one of \"pre_process\" (after video extraction), \"after_filter\" (after video passes filter), \"video\" (after --format; before --print/--output), \"before_dl\" (before each video download), \"post_process\" (after each video download; default), \"after_move\" (after moving the video file to its final location), \"after_video\" (after downloading and processing all formats of a video), or \"playlist\" (at end of playlist). This option can be used multiple times to add different postprocessors",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Eklenti son işleyici adı ve isteğe bağlı argümanlar (ad:ARGS). when= ile zamanlama. Birden çok kez kullanılabilir"
         }
       ]
     },
@@ -3023,7 +3262,8 @@
           "type": "value",
           "help": "SponsorBlock categories to create chapters for, separated by commas. Available categories are sponsor, intro, outro, selfpromo, preview, filler, interaction, music_offtopic, hook, poi_highlight, chapter, all and default (=all). You can prefix the category with a \"-\" to exclude it. See [1] for descriptions of the categories. E.g. --sponsorblock-mark all,-preview [1] https://wiki.sponsor.ajay.a pp/w/Segment_Categories",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "SponsorBlock kategorilerinden bölüm oluşturur (sponsor, intro, outro…). \"-\" ile hariç tutma"
         },
         {
           "id": "sponsorblock_remove",
@@ -3035,7 +3275,8 @@
           "type": "value",
           "help": "SponsorBlock categories to be removed from the video file, separated by commas. If a category is present in both mark and remove, remove takes precedence. The syntax and available categories are the same as for --sponsorblock-mark except that \"default\" refers to \"all,-filler\" and poi_highlight, chapter are not available",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "SponsorBlock kategorilerini videodan çıkarır. mark ve remove'da aynıysa remove önceliklidir"
         },
         {
           "id": "sponsorblock_chapter_title",
@@ -3047,7 +3288,8 @@
           "type": "value",
           "help": "An output template for the title of the SponsorBlock chapters created by --sponsorblock-mark. The only available fields are start_time, end_time, category, categories, name, category_names. Defaults to \"[SponsorBlock]: %(category_names)l\"",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "--sponsorblock-mark ile oluşturulan bölüm başlığı şablonu. Varsayılan: [SponsorBlock]: %(category_names)l"
         },
         {
           "id": "no_sponsorblock",
@@ -3059,7 +3301,8 @@
           "type": "bool",
           "help": "Disable both --sponsorblock-mark and --sponsorblock-remove",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "--sponsorblock-mark ve --sponsorblock-remove'u kapatır"
         },
         {
           "id": "sponsorblock_api",
@@ -3071,7 +3314,8 @@
           "type": "value",
           "help": "SponsorBlock API location, defaults to https://sponsor.ajay.app",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "SponsorBlock API adresi (varsayılan: https://sponsor.ajay.app)"
         }
       ]
     },
@@ -3090,7 +3334,8 @@
           "type": "value",
           "help": "Number of retries for known extractor errors (default is 3), or \"infinite\"",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Bilinen çıkarıcı hatalarında deneme sayısı (varsayılan 3) veya \"infinite\""
         },
         {
           "id": "allow_dynamic_mpd",
@@ -3102,7 +3347,8 @@
           "type": "bool",
           "help": "Process dynamic DASH manifests (default) (Alias: --no-ignore-dynamic-mpd)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dinamik DASH bildirimlerini işler (varsayılan)"
         },
         {
           "id": "ignore_dynamic_mpd",
@@ -3114,7 +3360,8 @@
           "type": "bool",
           "help": "Do not process dynamic DASH manifests (Alias: --no-allow-dynamic-mpd)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "Dinamik DASH bildirimlerini işlemez"
         },
         {
           "id": "hls_split_discontinuity",
@@ -3126,7 +3373,8 @@
           "type": "bool",
           "help": "Split HLS playlists to different formats at discontinuities such as ad breaks",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "HLS listelerini reklam gibi kesintilerde farklı biçimlere böler"
         },
         {
           "id": "no_hls_split_discontinuity",
@@ -3138,7 +3386,8 @@
           "type": "bool",
           "help": "Do not split HLS playlists into different formats at discontinuities such as ad breaks (default)",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "HLS'yi kesintilerde bölmez (varsayılan)"
         },
         {
           "id": "extractor_args",
@@ -3150,7 +3399,8 @@
           "type": "value",
           "help": "Pass ARGS arguments to the IE_KEY extractor. See \"EXTRACTOR ARGUMENTS\" for details. You can use this option multiple times to give arguments for different extractors",
           "multiple": true,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "IE_KEY çıkarıcısına ARGS verir (EXTRACTOR ARGUMENTS). Birden çok kez kullanılabilir"
         }
       ]
     },
@@ -3171,7 +3421,8 @@
           "preset_value": "mp3",
           "help": "-f 'ba[acodec^=mp3]/ba/b' -x --audio-format mp3",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "MP3 ses için hazır ayar: en iyi ses + -x --audio-format mp3"
         },
         {
           "id": "preset_aac",
@@ -3185,7 +3436,8 @@
           "preset_value": "aac",
           "help": "-f 'ba[acodec^=aac]/ba[acodec^=mp4a.40.]/ba/b' -x --audio-format aac",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "AAC ses için hazır ayar: uygun ses akışı + -x --audio-format aac"
         },
         {
           "id": "preset_mp4",
@@ -3199,7 +3451,8 @@
           "preset_value": "mp4",
           "help": "--merge-output-format mp4 --remux-video mp4 -S vcodec:h264,lang,quality,res,fps,hdr:12,a codec:aac",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "MP4 birleştirme/remux ve H.264/AAC tercih sıralaması"
         },
         {
           "id": "preset_mkv",
@@ -3213,7 +3466,8 @@
           "preset_value": "mkv",
           "help": "--merge-output-format mkv --remux-video mkv",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "MKV birleştirme ve remux hazır ayarı"
         },
         {
           "id": "preset_sleep",
@@ -3227,7 +3481,8 @@
           "preset_value": "sleep",
           "help": "--sleep-subtitles 5 --sleep-requests 0.75 --sleep-interval 10 --max-sleep-interval 20",
           "multiple": false,
-          "main_panel": false
+          "main_panel": false,
+          "help_tr": "İstek/altyazı/indirme aralarında nazik bekleme hazır ayarı"
         }
       ]
     }

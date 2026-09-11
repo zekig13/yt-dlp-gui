@@ -68,7 +68,7 @@ class OptionRow(ctk.CTkFrame):
             self.entry.grid(row=0, column=1, sticky="ew", pady=2)
             self.entry.configure(state="disabled")
 
-        help_txt = (opt.get("help") or "").strip()
+        help_txt = (opt.get("help_tr") or opt.get("help") or "").strip()
         if help_txt:
             short = help_txt if len(help_txt) <= 160 else help_txt[:157] + "…"
             self.help_lbl = ctk.CTkLabel(
@@ -126,6 +126,7 @@ class OptionRow(ctk.CTkFrame):
             [
                 " ".join(self.opt.get("flags", [])),
                 self.opt.get("help") or "",
+                self.opt.get("help_tr") or "",
                 self.opt.get("metavar") or "",
                 self.opt.get("preset_value") or "",
                 self.opt.get("id") or "",
@@ -135,7 +136,7 @@ class OptionRow(ctk.CTkFrame):
 
 
 class SectionFrame(ctk.CTkFrame):
-    """Collapsible-looking section with option rows."""
+    """Accordion section with option rows (default collapsed)."""
 
     def __init__(
         self,
@@ -149,25 +150,55 @@ class SectionFrame(ctk.CTkFrame):
         self.section = section
         self.on_change = on_change
         self.rows: list[OptionRow] = []
+        self._expanded = False
+        self._title = section.get("title_tr") or section.get("title") or ""
 
-        title = section.get("title_tr") or section.get("title") or ""
-        eng = section.get("title") or ""
-        header = f"{title}  ({eng})" if title != eng else title
-        self.header = ctk.CTkLabel(
+        self.header = ctk.CTkButton(
             self,
-            text=header,
+            text=self._header_label(),
             anchor="w",
             font=ctk.CTkFont(size=14, weight="bold"),
+            fg_color="transparent",
+            hover_color=("gray80", "gray30"),
+            text_color=("gray10", "gray90"),
+            command=self.toggle,
+            height=28,
         )
-        self.header.pack(fill="x", padx=8, pady=(10, 4))
+        self.header.pack(fill="x", padx=4, pady=(6, 2))
 
         self.body = ctk.CTkFrame(self, fg_color="transparent")
-        self.body.pack(fill="x", padx=8, pady=(0, 8))
+        # Default collapsed: body not packed until expand()
 
         for opt in section.get("options", []):
             row = OptionRow(self.body, opt, on_change=on_change)
             row.pack(fill="x", pady=1)
             self.rows.append(row)
+
+    def _header_label(self) -> str:
+        mark = "▼" if self._expanded else "▶"
+        return f"{mark}  {self._title}"
+
+    def expand(self) -> None:
+        if self._expanded:
+            self.header.configure(text=self._header_label())
+            return
+        self._expanded = True
+        self.header.configure(text=self._header_label())
+        self.body.pack(fill="x", padx=8, pady=(0, 8))
+
+    def collapse(self) -> None:
+        if not self._expanded:
+            self.header.configure(text=self._header_label())
+            return
+        self._expanded = False
+        self.header.configure(text=self._header_label())
+        self.body.pack_forget()
+
+    def toggle(self) -> None:
+        if self._expanded:
+            self.collapse()
+        else:
+            self.expand()
 
     def collect(self) -> dict[str, Any]:
         out: dict[str, Any] = {}
@@ -186,15 +217,20 @@ class SectionFrame(ctk.CTkFrame):
                 row.set_value(values[row.opt["id"]])
 
     def apply_filter(self, query: str) -> int:
+        q = (query or "").strip()
         visible = 0
         for row in self.rows:
-            if row.matches_filter(query):
+            if row.matches_filter(q):
                 row.pack(fill="x", pady=1)
                 visible += 1
             else:
                 row.pack_forget()
         if visible:
             self.pack(fill="x", padx=4, pady=4)
+            if q:
+                self.expand()
+            else:
+                self.collapse()
         else:
             self.pack_forget()
         return visible

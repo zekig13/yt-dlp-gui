@@ -44,6 +44,7 @@ def filter_catalog(query: str, catalog: dict[str, Any] | None = None) -> dict[st
                     opt.get("primary", ""),
                     opt.get("metavar") or "",
                     opt.get("help") or "",
+                    opt.get("help_tr") or "",
                     opt.get("preset_value") or "",
                     opt.get("id", ""),
                 ]
