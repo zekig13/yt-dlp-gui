@@ -50,7 +50,7 @@ YT-DLP GUI (Windows x64)
 
 Double-click yt-dlp-gui.exe to start. No Python install required.
 
-On first launch the app downloads yt-dlp.exe and ffmpeg into:
+On first launch the app downloads yt-dlp.exe, ffmpeg, and Deno (YouTube JS runtime) into:
   %LOCALAPPDATA%\yt-dlp-gui\bin\
 
 Crash log (if the window fails to open):

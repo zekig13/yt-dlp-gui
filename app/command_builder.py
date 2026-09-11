@@ -37,6 +37,7 @@ def build_command(
     cookies_path: str,
     option_values: dict[str, Any],
     catalog: dict[str, Any],
+    deno_path: str | None = None,
 ) -> list[str]:
     """Return argv list (executable first)."""
     cmd: list[str] = [ytdlp_path or "yt-dlp"]
@@ -53,6 +54,11 @@ def build_command(
     elif cookies:
         # Still pass if user set a path (file may appear later)
         cmd.extend(["--cookies", cookies])
+
+    # Explicit Deno path for YouTube JS challenges (also keep managed bin on PATH)
+    deno = (deno_path or "").strip()
+    if deno and Path(deno).is_file():
+        cmd.extend(["--js-runtimes", f"deno:{deno}"])
 
     # Track which primary flags are already supplied by option_values
     supplied: set[str] = set()

@@ -1,4 +1,4 @@
-"""Auto-provision yt-dlp.exe and ffmpeg into %LOCALAPPDATA%\\yt-dlp-gui\\bin."""
+"""Auto-provision yt-dlp.exe, ffmpeg, and deno into %LOCALAPPDATA%\\yt-dlp-gui\\bin."""
 from __future__ import annotations
 
 import os
@@ -23,6 +23,12 @@ FFMPEG_ZIP_URLS = (
     "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip",
 )
 
+# Official Deno Windows x64 zip (contains deno.exe)
+DENO_ZIP_URL = (
+    "https://github.com/denoland/deno/releases/latest/download/"
+    "deno-x86_64-pc-windows-msvc.zip"
+)
+
 ProgressCb = Callable[[str, float | None], None]
 
 
@@ -32,6 +38,7 @@ class ToolPaths:
     ytdlp: Path
     ffmpeg: Path
     ffprobe: Path
+    deno: Path
 
     def as_env_path_prefix(self) -> str:
         return str(self.bin_dir)
@@ -61,6 +68,7 @@ def tool_paths() -> ToolPaths:
         ytdlp=bin_dir / f"yt-dlp{exe}",
         ffmpeg=bin_dir / f"ffmpeg{exe}",
         ffprobe=bin_dir / f"ffprobe{exe}",
+        deno=bin_dir / f"deno{exe}",
     )
 
 
@@ -87,12 +95,12 @@ def _download_file(
     req = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "yt-dlp-gui/1.1 (dependency bootstrap)",
+            "User-Agent": "yt-dlp-gui/1.3 (dependency bootstrap)",
             "Accept": "*/*",
         },
     )
     try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
+        with urllib.request.urlopen(req, timeout=180) as resp:
             total = resp.headers.get("Content-Length")
             total_n = int(total) if total and total.isdigit() else None
             done = 0
@@ -177,6 +185,16 @@ def _ffmpeg_ok(ffmpeg: Path, ffprobe: Path) -> bool:
         return False
 
 
+def _deno_ok(path: Path) -> bool:
+    if not path.is_file():
+        return False
+    try:
+        _run_version([str(path), "--version"])
+        return True
+    except RuntimeError:
+        return False
+
+
 def _ensure_ytdlp(paths: ToolPaths, progress: ProgressCb | None) -> None:
     if _ytdlp_ok(paths.ytdlp):
         ver = _run_version([str(paths.ytdlp), "--version"])
@@ -254,13 +272,52 @@ def _ensure_ffmpeg(paths: ToolPaths, progress: ProgressCb | None) -> None:
     _report(progress, f"ffmpeg hazır ({ver})", 1.0)
 
 
+def _extract_deno_binary(zip_path: Path, dest_dir: Path, progress: ProgressCb | None) -> None:
+    target_name = "deno.exe" if sys.platform == "win32" else "deno"
+    with zipfile.ZipFile(zip_path, "r") as zf:
+        match: zipfile.ZipInfo | None = None
+        for info in zf.infolist():
+            if info.is_dir():
+                continue
+            if Path(info.filename).name.lower() == target_name.lower():
+                match = info
+                break
+        if match is None:
+            raise RuntimeError(f"Zip içinde {target_name} yok")
+        _report(progress, "Deno çıkarılıyor…", 0.9)
+        target = dest_dir / target_name
+        with zf.open(match) as src, target.open("wb") as out:
+            shutil.copyfileobj(src, out)
+
+
+def _ensure_deno(paths: ToolPaths, progress: ProgressCb | None) -> None:
+    if _deno_ok(paths.deno):
+        ver = _run_version([str(paths.deno), "--version"])
+        _report(progress, f"Deno hazır ({ver})", 1.0)
+        return
+
+    _report(progress, "Deno indiriliyor…", 0.0)
+    with tempfile.TemporaryDirectory(prefix="ytdlp-gui-deno-") as tmp:
+        zip_path = Path(tmp) / "deno.zip"
+        _download_file(DENO_ZIP_URL, zip_path, progress=progress, label="Deno")
+        _extract_deno_binary(zip_path, paths.bin_dir, progress)
+
+    if not _deno_ok(paths.deno):
+        raise RuntimeError(
+            "Deno çıkarıldı ancak çalıştırılamadı. Antivirüs engelliyor olabilir."
+        )
+    ver = _run_version([str(paths.deno), "--version"])
+    _report(progress, f"Deno hazır ({ver})", 1.0)
+
+
 def ensure_dependencies(
     *,
     progress: ProgressCb | None = None,
     force_ytdlp: bool = False,
     force_ffmpeg: bool = False,
+    force_deno: bool = False,
 ) -> ToolPaths:
-    """Download yt-dlp + ffmpeg into managed bin dir if missing/broken.
+    """Download yt-dlp + ffmpeg + deno into managed bin dir if missing/broken.
 
     Returns absolute tool paths. Raises RuntimeError with a Turkish message on failure.
     """
@@ -279,10 +336,16 @@ def ensure_dependencies(
                     p.unlink()
                 except OSError:
                     pass
+    if force_deno and paths.deno.exists():
+        try:
+            paths.deno.unlink()
+        except OSError:
+            pass
 
     try:
         _ensure_ytdlp(paths, progress)
         _ensure_ffmpeg(paths, progress)
+        _ensure_deno(paths, progress)
     except RuntimeError:
         raise
     except Exception as exc:  # noqa: BLE001
@@ -307,4 +370,9 @@ def verify_tools(paths: ToolPaths | None = None) -> tuple[bool, str]:
     else:
         ok = False
         parts.append("ffmpeg: eksik")
+    if _deno_ok(p.deno):
+        parts.append(f"deno: {_run_version([str(p.deno), '--version'])}")
+    else:
+        ok = False
+        parts.append("deno: eksik")
     return ok, " | ".join(parts)

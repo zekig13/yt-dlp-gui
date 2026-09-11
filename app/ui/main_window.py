@@ -44,6 +44,7 @@ class MainWindow(ctk.CTk):
         self._deps_error: str | None = None
         self._deps_busy = False
         self._bin_dir = managed_bin_dir()
+        self._deno_path = tool_paths().deno
 
         geo = self.settings.get("window_geometry") or "1100x780"
         try:
@@ -346,6 +347,7 @@ class MainWindow(ctk.CTk):
             cookies_path=self.cookies_var.get().strip(),
             option_values=self._collect_option_values(),
             catalog=self.catalog,
+            deno_path=str(self._deno_path) if self._deno_path else None,
         )
 
     def _schedule_preview(self) -> None:
@@ -454,6 +456,7 @@ class MainWindow(ctk.CTk):
                     progress=progress,
                     force_ytdlp=force,
                     force_ffmpeg=force,
+                    force_deno=force,
                 )
                 self.after(0, lambda: self._deps_finished(ok=True, paths=paths, error=None))
             except Exception as exc:  # noqa: BLE001
@@ -470,6 +473,7 @@ class MainWindow(ctk.CTk):
             self._deps_ready = True
             self._deps_error = None
             self._bin_dir = paths.bin_dir
+            self._deno_path = paths.deno
             # Keep advanced override if user already chose a custom path that exists
             current = self.ytdlp_var.get().strip()
             managed = str(paths.ytdlp)
@@ -477,7 +481,9 @@ class MainWindow(ctk.CTk):
                 r"\yt-dlp\yt-dlp.exe"
             ):
                 self.ytdlp_var.set(managed)
-            self.deps_status_var.set(f"Araçlar hazır — {paths.bin_dir}")
+            self.deps_status_var.set(
+                f"Araçlar hazır (yt-dlp, ffmpeg, Deno) — {paths.bin_dir}"
+            )
             self.status_var.set("Hazır — URL yapıştırıp İndir’e basın")
             self.btn_run.configure(state="normal")
             self._schedule_preview()
@@ -489,7 +495,7 @@ class MainWindow(ctk.CTk):
             self.btn_run.configure(state="disabled")
             messagebox.showerror(
                 "Araçlar kurulamadı",
-                "yt-dlp ve ffmpeg otomatik indirilemedi.\n\n"
+                "yt-dlp, ffmpeg ve Deno otomatik indirilemedi.\n\n"
                 f"{self._deps_error}\n\n"
                 "İnternet bağlantınızı kontrol edip «Araçları Yenile»ye basın.",
             )
@@ -505,7 +511,7 @@ class MainWindow(ctk.CTk):
         if not self._deps_ready:
             if messagebox.askyesno(
                 "Araçlar eksik",
-                "yt-dlp / ffmpeg henüz hazır değil.\nYeniden denemek ister misiniz?",
+                "yt-dlp / ffmpeg / Deno henüz hazır değil.\nYeniden denemek ister misiniz?",
             ):
                 self._start_deps_ensure(force=True)
             return
@@ -535,6 +541,8 @@ class MainWindow(ctk.CTk):
         self.log_box.configure(state="disabled")
         self._append_log("$ " + command_preview(argv))
         self._append_log(f"[PATH += {self._bin_dir}]")
+        if self._deno_path and Path(self._deno_path).is_file():
+            self._append_log(f"[js-runtimes deno:{self._deno_path}]")
         self._append_log("—")
 
         self.btn_run.configure(state="disabled")
